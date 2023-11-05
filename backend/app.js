@@ -1,8 +1,9 @@
 const express = require("express");
-const router = require("./routes/userRoute");
+const userRouter = require("./routes/userRoute");
 
 const app = express();
-app.use("/api", router)
+app.use(express.json())
+app.use("/api/user", userRouter)
 
 
 app.listen(5000, () => {

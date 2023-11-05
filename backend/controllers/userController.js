@@ -1,5 +1,6 @@
 const createUser = (req, res) => {
-    res.send("I Will create user");
+    console.log(req.body)
+    res.send({ user: req.body });
 }
 
 
