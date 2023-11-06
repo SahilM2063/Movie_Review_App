@@ -18,6 +18,7 @@ const emailVerificationTokenSchema = mongoose.Schema({
     }
 });
 
+// Hashing The token
 emailVerificationTokenSchema.pre("save", async function (next) {
     if (this.isModified("token")) {
         this.token = await bcrypt.hash(this.token, 10);
@@ -25,5 +26,12 @@ emailVerificationTokenSchema.pre("save", async function (next) {
 
     next();
 });
+
+// this is how custom method can be implemented
+// here this compareToken is used for comparing hashed token and token entered by user.
+emailVerificationTokenSchema.methods.compareToken = async function (token) {
+    const result = await bcrypt.compare(token, this.token);
+    return result
+}
 
 module.exports = mongoose.model("EmailVerificationToken", emailVerificationTokenSchema)
