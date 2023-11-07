@@ -3,7 +3,8 @@ const nodemailer = require("nodemailer")
 const EmailVerificationToken = require("../models/emailVerificationToken.js")
 const { isValidObjectId } = require("mongoose")
 const { generateOTP, generateMailTransporter } = require("../utils/mail.js")
-const { sendError } = require("../utils/helper.js")
+const { sendError, generateRandomBytes } = require("../utils/helper.js")
+const PasswordResetToken = require("../models/passwordResetToken.js")
 
 const createUser = async (req, res) => {
     const { name, email, password } = req.body
@@ -100,17 +101,10 @@ const resendEmailVerificationToken = async (req, res) => {
     await newEmailVerificationToken.save();
 
     // Send this otp to user's mail
-    var transport = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
-        auth: {
-            user: "1c66f85c993e3c",
-            pass: "a4feaee91ce23c"
-        }
-    });
+    var transport = generateMailTransporter();
 
     transport.sendMail({
-        from: 'verification@MVR.com',
+        from: 're-verification@MVR.com',
         to: user.email,
         subject: 'Re-Email verification',
         html: `
@@ -122,4 +116,37 @@ const resendEmailVerificationToken = async (req, res) => {
     res.json({ message: "New OTP is sent to your registered email id." })
 
 }
-module.exports = { createUser, verifyEmail, resendEmailVerificationToken };
+
+const forgetPassword = async (req, res) => {
+    const { email } = req.body
+
+    if (!email) return sendError(res, "Email is missing");
+
+    const user = await User.findOne({ email });
+    if (!user) return sendError(res, "User not found!", 404);
+
+    const alreadyHasToken = await PasswordResetToken.findOne({ owner: user._id });
+    if (alreadyHasToken) return sendError(res, "Only after one hour you can request for another token.");
+
+    const token = await generateRandomBytes();
+    const newPasswordResetToken = await PasswordResetToken({ owner: user._id, token });
+    await newPasswordResetToken.save();
+
+    const resetPasswordUrl = `http://localhost:3000/reset-password?token=${token}&id=${user._id}`;
+
+    // Send this otp to user's mail
+    var transport = generateMailTransporter();
+
+    transport.sendMail({
+        from: 'security@MVR.com',
+        to: user.email,
+        subject: 'Reset password link',
+        html: `
+                <h1>Click here to reset a password</h1>
+                <a href="${resetPasswordUrl}">Change password</a>
+                `
+    });
+
+    res.json({ message: "link send to your email." })
+}
+module.exports = { createUser, verifyEmail, resendEmailVerificationToken, forgetPassword };
