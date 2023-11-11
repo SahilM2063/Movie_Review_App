@@ -6,6 +6,7 @@ const { generateOTP, generateMailTransporter } = require("../utils/mail.js")
 const { sendError, generateRandomBytes } = require("../utils/helper.js")
 const PasswordResetToken = require("../models/passwordResetToken.js")
 const userRouter = require("../routes/userRoute.js")
+const jwt = require("jsonwebtoken")
 
 const createUser = async (req, res) => {
     const { name, email, password } = req.body
@@ -176,10 +177,26 @@ const resetPassword = async (req, res) => {
         html: `
         <h1>Password Reset Successfully</h1>
         <h4>Now you can use new password.</h4>
-        ` 
+        `
     });
 
     res.json({ message: "Password reset successfully, now you can use new password" })
 }
 
-module.exports = { createUser, verifyEmail, resendEmailVerificationToken, forgetPassword, sendResetPasswordTokenStatus, resetPassword };
+const signIn = async (req, res) => {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) return sendError(res, "Email or Password is invalid")
+
+    const matched = await user.comparePassword(password);
+    if (!matched) return sendError(res, "Email or Password is invalid");
+
+    const jwtToken = jwt.sign({ userId: user._id }, "OnePieceIsReal")
+
+    const { _id, name } = user
+
+    res.json({ user: { id: _id , name, email, token : jwtToken} })
+}
+
+module.exports = { createUser, verifyEmail, resendEmailVerificationToken, forgetPassword, sendResetPasswordTokenStatus, resetPassword, signIn };
