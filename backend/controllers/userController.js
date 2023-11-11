@@ -5,6 +5,7 @@ const { isValidObjectId } = require("mongoose")
 const { generateOTP, generateMailTransporter } = require("../utils/mail.js")
 const { sendError, generateRandomBytes } = require("../utils/helper.js")
 const PasswordResetToken = require("../models/passwordResetToken.js")
+const userRouter = require("../routes/userRoute.js")
 
 const createUser = async (req, res) => {
     const { name, email, password } = req.body
@@ -22,7 +23,7 @@ const createUser = async (req, res) => {
     await newEmailVerificationToken.save();
 
     // Send this otp to user's mail
-    var transport = generateMailTransporter();
+    const transport = generateMailTransporter();
 
     transport.sendMail({
         from: 'verification@MVR.com',
@@ -67,7 +68,7 @@ const verifyEmail = async (req, res) => {
 
     await EmailVerificationToken.findByIdAndDelete(token._id);
 
-    var transport = generateMailTransporter();
+    const transport = generateMailTransporter();
 
     transport.sendMail({
         from: 'verification@MVR.com',
@@ -101,7 +102,7 @@ const resendEmailVerificationToken = async (req, res) => {
     await newEmailVerificationToken.save();
 
     // Send this otp to user's mail
-    var transport = generateMailTransporter();
+    const transport = generateMailTransporter();
 
     transport.sendMail({
         from: 're-verification@MVR.com',
@@ -149,4 +150,36 @@ const forgetPassword = async (req, res) => {
 
     res.json({ message: "link send to your email." })
 }
-module.exports = { createUser, verifyEmail, resendEmailVerificationToken, forgetPassword };
+
+const sendResetPasswordTokenStatus = (req, res) => {
+    res.json({ valid: "true" })
+}
+
+const resetPassword = async (req, res) => {
+    const { newPassword, userId } = req.body
+
+    const user = await User.findById(userId);
+    const matched = await user.comparePassword(newPassword);
+    if (matched) return sendError(res, "New password must be different from older once.");
+
+    user.password = newPassword;
+    await user.save();
+
+    await PasswordResetToken.findByIdAndDelete(req.resetToken._id)
+
+    const transport = generateMailTransporter();
+
+    transport.sendMail({
+        from: 'verification@MVR.com',
+        to: user.email,
+        subject: 'Password Reset Successfully',
+        html: `
+        <h1>Password Reset Successfully</h1>
+        <h4>Now you can use new password.</h4>
+        `
+    });
+
+    res.json({ message: "Password reset successfully" })
+}
+
+module.exports = { createUser, verifyEmail, resendEmailVerificationToken, forgetPassword, sendResetPasswordTokenStatus, resetPassword };
