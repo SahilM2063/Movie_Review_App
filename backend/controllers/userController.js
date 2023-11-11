@@ -192,11 +192,11 @@ const signIn = async (req, res) => {
     const matched = await user.comparePassword(password);
     if (!matched) return sendError(res, "Email or Password is invalid");
 
-    const jwtToken = jwt.sign({ userId: user._id }, "OnePieceIsReal")
+    const jwtToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET) 
 
     const { _id, name } = user
 
-    res.json({ user: { id: _id , name, email, token : jwtToken} })
+    res.json({ user: { id: _id, name, email, token: jwtToken } })
 }
 
 module.exports = { createUser, verifyEmail, resendEmailVerificationToken, forgetPassword, sendResetPasswordTokenStatus, resetPassword, signIn };
