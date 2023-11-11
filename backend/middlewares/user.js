@@ -2,7 +2,7 @@ const { isValidObjectId } = require("mongoose");
 const PasswordResetToken = require("../models/passwordResetToken.js");
 const { sendError } = require("../utils/helper.js");
 
-exports.isValidPassToken = async (req, res, next) => {
+exports.isValidPassResetToken = async (req, res, next) => {
     const { userId, token } = req.body;
 
     if (!token.trim() || !isValidObjectId(userId)) return sendError(res, "Invalid request");

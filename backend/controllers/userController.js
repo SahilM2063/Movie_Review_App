@@ -156,7 +156,7 @@ const sendResetPasswordTokenStatus = (req, res) => {
 }
 
 const resetPassword = async (req, res) => {
-    const { newPassword, userId } = req.body
+    const { newPassword, userId } = req.body;
 
     const user = await User.findById(userId);
     const matched = await user.comparePassword(newPassword);
@@ -170,16 +170,16 @@ const resetPassword = async (req, res) => {
     const transport = generateMailTransporter();
 
     transport.sendMail({
-        from: 'verification@MVR.com',
+        from: 'secutity@MVR.com',
         to: user.email,
         subject: 'Password Reset Successfully',
         html: `
         <h1>Password Reset Successfully</h1>
         <h4>Now you can use new password.</h4>
-        `
+        ` 
     });
 
-    res.json({ message: "Password reset successfully" })
+    res.json({ message: "Password reset successfully, now you can use new password" })
 }
 
 module.exports = { createUser, verifyEmail, resendEmailVerificationToken, forgetPassword, sendResetPasswordTokenStatus, resetPassword };
