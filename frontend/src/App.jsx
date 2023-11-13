@@ -1,14 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React from "react";
+import Navbar from "./components/users/Navbar";
 
 const App = () => {
   return (
-    <div>
-      <h1 className="btn btn-primary">
-      Hello world!
-    </h1>
-    </div>
-  )
-}
+    <>
+      <Navbar />
+    </>
+  );
+};
 
-export default App
+export default App;
