@@ -30,9 +30,12 @@ const SignIn = () => {
               required
             />
             <label className="label flex-col items-start gap-2 my-1">
-              <a href="#" className="label-text-alt link link-hover">
+              <Link
+                to={"/auth/forget-password"}
+                className="label-text-alt link link-hover"
+              >
                 Forgot password?
-              </a>
+              </Link>
               <p className="label-text-alt">
                 Don&#39;t have an account ?{" "}
                 <Link
