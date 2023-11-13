@@ -18,10 +18,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/auth/sign-in" element={<SignIn />} />
         <Route path="/auth/sign-up" element={<SignUp />} />
-        <Route
-          path="/auth/email-verification"
-          element={<EmailVerification />}
-        />
+        <Route path="/auth/verification" element={<EmailVerification />} />
         <Route path="/auth/forget-password" element={<ForgetPassword />} />
         <Route path="/auth/confirm-password" element={<ConfirmPassword />} />
       </Routes>
