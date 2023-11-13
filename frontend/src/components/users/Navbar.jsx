@@ -5,7 +5,7 @@ import logo from "../../assets/logo.svg";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 px-10 md:px-4 sm:px-2 xs:px-0 justify-between">
+    <div className="navbar bg-base-100 px-10 md:px-4 sm:px-2 xs:px-0 justify-between drop-shadow-md">
       <div className="w-[30%]">
         <img src={logo} alt="logo" className="max-w-[170px] cursor-pointer" />
         {/* <h1 className="text-3xl font-bold">CineViewPoint</h1> */}
