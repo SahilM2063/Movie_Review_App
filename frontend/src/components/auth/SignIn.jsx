@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
   return (
@@ -33,7 +34,14 @@ const SignIn = () => {
                 Forgot password?
               </a>
               <p className="label-text-alt">
-                Don&#39;t have an account ? <a href="#" className="label-text-alt link link-hover"> Sign up</a>
+                Don&#39;t have an account ?{" "}
+                <Link
+                  to={"/auth/sign-up"}
+                  className="label-text-alt link link-hover"
+                >
+                  {" "}
+                  Sign up
+                </Link>
               </p>
             </label>
           </div>

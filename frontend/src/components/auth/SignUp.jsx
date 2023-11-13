@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   return (
@@ -42,16 +43,19 @@ const SignUp = () => {
             <label className="label my-1">
               <p className="label-text-alt">
                 Already have an account ?{" "}
-                <a href="#" className="label-text-alt link link-hover">
+                <Link
+                  to={"/auth/sign-in"}
+                  className="label-text-alt link link-hover"
+                >
                   {" "}
                   Sign in
-                </a>
+                </Link>
               </p>
             </label>
           </div>
           <div className="form-control">
             <button className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs">
-              Sign In
+              Sign Up
             </button>
           </div>
         </form>

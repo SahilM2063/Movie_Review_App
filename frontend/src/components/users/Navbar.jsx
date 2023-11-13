@@ -2,14 +2,15 @@
 import React from "react";
 import { HiOutlineSun } from "react-icons/hi";
 import logo from "../../assets/logo.svg";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <div className="navbar bg-base-100 px-10 md:px-4 sm:px-2 xs:px-0 justify-between drop-shadow-md">
-      <div className="w-[30%]">
+      <Link to={"/"} className="w-[30%]">
         <img src={logo} alt="logo" className="max-w-[170px] cursor-pointer" />
         {/* <h1 className="text-3xl font-bold">CineViewPoint</h1> */}
-      </div>
+      </Link>
 
       <div className="dropdown">
         <label
@@ -58,9 +59,12 @@ const Navbar = () => {
             className="input input-bordered outline-none rounded-sm w-24 md:w-auto px-2 h-9 text-xs w-full"
           />
         </div>
-        <button className="btn px-3 min-h-8 h-9 rounded-sm text-xs">
+        <Link
+          to={"/auth/sign-in"}
+          className="btn px-3 min-h-8 h-9 rounded-sm text-xs"
+        >
           Login
-        </button>
+        </Link>
       </div>
     </div>
   );
