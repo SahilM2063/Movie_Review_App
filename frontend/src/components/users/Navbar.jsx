@@ -33,10 +33,10 @@ const Navbar = () => {
         </label>
         <ul
           tabIndex={0}
-          className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-40 right-2 rounded-sm gap-3"
+          className="menu menu-sm dropdown-content mt-2 z-[1] p-2 shadow bg-base-100 rounded-box w-40 right-0 rounded-sm gap-2"
         >
           <HiOutlineSun className="cursor-pointer text-2xl w-full" />
-          <div className="form-control">
+          <div className="form-control w-full">
             <input
               type="text"
               placeholder="Search..."
