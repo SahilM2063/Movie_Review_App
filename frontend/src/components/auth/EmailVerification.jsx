@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 const OTP_Length = 6;
 
@@ -77,6 +78,14 @@ const EmailVerification = () => {
               );
             })}
           </div>
+          <label className="label">
+            <Link
+              to={"/auth/sign-in"}
+              className="label-text-alt link link-hover"
+            >
+              Sign in
+            </Link>
+          </label>
           <div className="form-control">
             <button className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs">
               Submit
