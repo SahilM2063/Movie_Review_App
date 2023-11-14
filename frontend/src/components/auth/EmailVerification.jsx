@@ -16,13 +16,15 @@ const EmailVerification = () => {
     newOTP[index] = value.substring(value.length - 1, value.length);
 
     // movement of cursor
-    if (!value) focusPrevInputField(index);
-    else focusNextInputField(index);
-
+    if (!value) {
+      focusPrevInputField(index);
+    } else {
+      focusNextInputField(index);
+    }
     setOTP([...newOTP]);
   };
 
-  // below two functions used for movement of cursor between OTP tray boxes
+  // below three functions used for movement of cursor between OTP tray boxes
   const focusPrevInputField = (index) => {
     let nextIndex;
     const diff = index - 1;
@@ -33,6 +35,14 @@ const EmailVerification = () => {
 
   const focusNextInputField = (index) => {
     setActiveOTPIndex(index + 1);
+  };
+
+  const handleKeyDown = ({ key }, index) => {
+    if (key === "Backspace") {
+      if (!otp[index] && index > 0) {
+        focusPrevInputField(index);
+      }
+    }
   };
 
   useEffect(() => {
@@ -58,6 +68,7 @@ const EmailVerification = () => {
                   ref={activeOTPIndex === index ? inputRef : null}
                   value={otp[index] || ""}
                   onChange={(e) => handleOtpChange(e, index)}
+                  onKeyDown={(e) => handleKeyDown(e, index)}
                   type="number"
                   className="input input-bordered spin-button-none w-12 text-center font-semibold xs:w-10 xs:h-10 xs:text-xs xs sm:w-10 sm:h-10 sm:text-xs"
                   max={1}
