@@ -1,6 +1,24 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
+const validateUserInfo = ({ name, email, password }) => {
+  var isValidName = /^[a-z A-Z]+$/; // name checking regex
+  var isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; // email checking regex
+
+  if (!name.trim()) return { ok: false, error: "Name is missing" };
+  if (!isValidName.test(name)) return { ok: false, error: "Invalid name" };
+
+  if (!email.trim()) return { ok: false, error: "Email is missing" };
+  if (!isValidEmail.test(email)) return { ok: false, error: "Invalid email" };
+
+  if (!password.trim()) return { ok: false, error: "Password is missing" };
+  if (password.length < 8)
+    return { ok: false, error: "Password must be 8 characters long" };
+
+  return { ok: true };
+};
 
 const SignUp = () => {
   const [userInfo, setUserInfo] = useState({
@@ -16,6 +34,10 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { ok, error } = validateUserInfo(userInfo);
+
+    if (!ok) return console.log(error);
+
     console.log(userInfo);
   };
 
@@ -37,7 +59,6 @@ const SignUp = () => {
               placeholder="name"
               onChange={handleChange}
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
-              required
             />
           </div>
           <div className="form-control">
@@ -51,7 +72,6 @@ const SignUp = () => {
               placeholder="email"
               onChange={handleChange}
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
-              required
             />
           </div>
           <div className="form-control">
@@ -65,7 +85,6 @@ const SignUp = () => {
               placeholder="password"
               onChange={handleChange}
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
-              required
             />
             <label className="label my-1">
               <p className="label-text-alt">
