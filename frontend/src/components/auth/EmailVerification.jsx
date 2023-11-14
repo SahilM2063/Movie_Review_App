@@ -14,9 +14,24 @@ const EmailVerification = () => {
 
     const newOTP = [...otp];
     newOTP[index] = value.substring(value.length - 1, value.length);
+
+    // movement of cursor
+    if (!value) focusPrevInputField(index);
+    else focusNextInputField(index);
+
     setOTP([...newOTP]);
-    // console.log(value);
-    // setOTP([value]);
+  };
+
+  // below two functions used for movement of cursor between OTP tray boxes
+  const focusPrevInputField = (index) => {
+    let nextIndex;
+    const diff = index - 1;
+    nextIndex = diff !== 0 ? diff : 0;
+
+    setActiveOTPIndex(nextIndex);
+  };
+
+  const focusNextInputField = (index) => {
     setActiveOTPIndex(index + 1);
   };
 
@@ -38,18 +53,16 @@ const EmailVerification = () => {
           <div className="form-control flex flex-row justify-center items-center flex-wrap gap-2 my-2">
             {otp.map((_, index) => {
               return (
-                <>
-                  <input
-                    key={index}
-                    ref={activeOTPIndex === index ? inputRef : null}
-                    value={otp[index] || ""}
-                    onChange={(e) => handleOtpChange(e, index)}
-                    type="number"
-                    className="input input-bordered spin-button-none w-12 text-center font-semibold xs:w-10 xs:h-10 xs:text-xs xs sm:w-10 sm:h-10 sm:text-xs"
-                    max={1}
-                    maxLength={1}
-                  />
-                </>
+                <input
+                  key={index}
+                  ref={activeOTPIndex === index ? inputRef : null}
+                  value={otp[index] || ""}
+                  onChange={(e) => handleOtpChange(e, index)}
+                  type="number"
+                  className="input input-bordered spin-button-none w-12 text-center font-semibold xs:w-10 xs:h-10 xs:text-xs xs sm:w-10 sm:h-10 sm:text-xs"
+                  max={1}
+                  maxLength={1}
+                />
               );
             })}
           </div>
