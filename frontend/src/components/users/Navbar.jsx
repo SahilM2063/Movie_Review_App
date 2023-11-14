@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineMoon } from "react-icons/hi2";
 import { LuSunMedium } from "react-icons/lu";
-import logo from "../../assets/logo.svg";
+import logoLight from "../../assets/logoLight.svg";
+import logoDark from "../../assets/logoDark.svg";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -16,10 +17,18 @@ const Navbar = () => {
         : false
       : true
   );
+  const [Logo, setLogo] = useState(
+    localStorage.getItem("theme")
+      ? localStorage.getItem("theme") === "mytheme1"
+        ? logoLight
+        : logoDark
+      : true
+  );
 
   const toggleTheme = () => {
     setTheme(theme === "mytheme1" ? "lemonade" : "mytheme1");
     setThemeTgBtn(theme === "mytheme1" ? false : true);
+    setLogo(theme === "mytheme1" ? logoDark : logoLight);
   };
 
   useEffect(() => {
@@ -31,7 +40,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 px-10 md:px-4 sm:px-2 xs:px-0 justify-between drop-shadow-md">
       <Link to={"/"} className="w-[30%]">
-        <img src={logo} alt="logo" className="max-w-[170px] cursor-pointer" />
+        <img src={Logo} alt="logo" className="max-w-[170px] cursor-pointer" />
         {/* <h1 className="text-3xl font-bold">CineViewPoint</h1> */}
       </Link>
 
