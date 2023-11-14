@@ -1,10 +1,29 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const OTP_Length = 6;
 
 const EmailVerification = () => {
   const [otp, setOTP] = useState(new Array(OTP_Length).fill(""));
+  const [activeOTPIndex, setActiveOTPIndex] = useState(0);
+
+  const inputRef = useRef();
+
+  const handleOtpChange = ({ target }, index) => {
+    const { value } = target;
+
+    const newOTP = [...otp];
+    newOTP[index] = value.substring(value.length - 1, value.length);
+    setOTP([...newOTP]);
+    // console.log(value);
+    // setOTP([value]);
+    setActiveOTPIndex(index + 1);
+  };
+
+  useEffect(() => {
+    inputRef.current?.focus();
+    // console.log(inputRef)
+  }, [activeOTPIndex]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">
@@ -22,6 +41,9 @@ const EmailVerification = () => {
                 <>
                   <input
                     key={index}
+                    ref={activeOTPIndex === index ? inputRef : null}
+                    value={otp[index] || ""}
+                    onChange={(e) => handleOtpChange(e, index)}
                     type="number"
                     className="input input-bordered spin-button-none w-12 text-center font-semibold xs:w-10 xs:h-10 xs:text-xs xs sm:w-10 sm:h-10 sm:text-xs"
                     max={1}
