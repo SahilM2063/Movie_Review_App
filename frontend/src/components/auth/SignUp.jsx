@@ -1,12 +1,30 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setUserInfo({ ...userInfo, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(userInfo);
+  };
+
+  const { name, email, password } = userInfo;
+
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">
       <div className="card flex-shrink-0 w-full max-w-sm shadow-sm bg-base-200 rounded-md">
-        <form className="card-body p-6">
+        <form className="card-body p-6" onSubmit={handleSubmit}>
           <h1 className="text-center text-xl font-semibold">Sign Up</h1>
           <div className="form-control">
             <label className="label">
@@ -14,7 +32,10 @@ const SignUp = () => {
             </label>
             <input
               type="text"
+              name="name"
+              value={name}
               placeholder="name"
+              onChange={handleChange}
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
               required
             />
@@ -25,7 +46,10 @@ const SignUp = () => {
             </label>
             <input
               type="email"
+              name="email"
+              value={email}
               placeholder="email"
+              onChange={handleChange}
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
               required
             />
@@ -36,7 +60,10 @@ const SignUp = () => {
             </label>
             <input
               type="password"
+              name="password"
+              value={password}
               placeholder="password"
+              onChange={handleChange}
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
               required
             />
