@@ -1,10 +1,33 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
-import { HiOutlineSun } from "react-icons/hi";
+import React, { useEffect, useState } from "react";
+import { HiOutlineMoon } from "react-icons/hi2";
+import { LuSunMedium } from "react-icons/lu";
 import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ?? "mytheme1"
+  );
+  const [themeTgBtn, setThemeTgBtn] = useState(
+    localStorage.getItem("theme")
+      ? localStorage.getItem("theme") === "mytheme1"
+        ? true
+        : false
+      : true
+  );
+
+  const toggleTheme = () => {
+    setTheme(theme === "mytheme1" ? "lemonade" : "mytheme1");
+    setThemeTgBtn(theme === "mytheme1" ? false : true);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
+
   return (
     <div className="navbar bg-base-100 px-10 md:px-4 sm:px-2 xs:px-0 justify-between drop-shadow-md">
       <Link to={"/"} className="w-[30%]">
@@ -36,7 +59,16 @@ const Navbar = () => {
           tabIndex={0}
           className="menu menu-sm dropdown-content mt-2 z-[1] p-2 shadow bg-base-100 rounded-box w-40 right-0 rounded-sm gap-2"
         >
-          <HiOutlineSun className="cursor-pointer text-2xl w-full" />
+          <div className="w-full flex items-center">
+            <LuSunMedium className="cursor-pointer text-xl w-full" />
+            <input
+              type="checkbox"
+              className="toggle toggle-md"
+              checked={themeTgBtn}
+              onChange={toggleTheme}
+            />
+            <HiOutlineMoon className="cursor-pointer text-xl w-full" />
+          </div>
           <div className="form-control w-full">
             <input
               type="text"
@@ -51,7 +83,16 @@ const Navbar = () => {
       </div>
 
       <div className="flex-1 gap-3 xs:hidden sm:hidden md:hidden justify-end">
-        <HiOutlineSun className="cursor-pointer text-2xl" />
+        <div className="flex gap-1 items-center">
+          <LuSunMedium className="cursor-pointer text-xl" />
+          <input
+            type="checkbox"
+            className="toggle toggle-md"
+            checked={themeTgBtn}
+            onChange={toggleTheme}
+          />
+          <HiOutlineMoon className="cursor-pointer text-xl" />
+        </div>
         <div className="form-control w-[20%]">
           <input
             type="text"

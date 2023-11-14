@@ -52,7 +52,7 @@ const EmailVerification = () => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">
-      <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200 rounded-md">
+      <div className="card flex-shrink-0 w-full max-w-sm shadow-sm bg-base-200 rounded-md">
         <form className="card-body p-6">
           <h1 className="text-center text-xl font-semibold">
             Please enter OTP to verify account
