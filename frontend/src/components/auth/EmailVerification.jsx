@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { verifyUserEmail } from "../../api/auth";
 
 const OTP_Length = 6;
 
@@ -61,12 +62,19 @@ const EmailVerification = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!isValidOtp(otp)) return console.log("invalid otp");
 
-    console.log(otp)
+    const { error, message } = await verifyUserEmail({
+      OTP: otp.join(""),
+      userId: user.id,
+    });
+
+    if (error) return console.log(error);
+
+    console.log(message);
   };
 
   useEffect(() => {
@@ -74,9 +82,9 @@ const EmailVerification = () => {
     // console.log(inputRef)
   }, [activeOTPIndex]);
 
-  // useEffect(() => {
-  //   if (!user) navigate("/not-found");
-  // }, [user]);
+  useEffect(() => {
+    if (!user) navigate("/not-found");
+  }, [user]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">
