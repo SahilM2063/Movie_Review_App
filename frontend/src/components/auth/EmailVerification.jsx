@@ -4,6 +4,16 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const OTP_Length = 6;
 
+const isValidOtp = (otp) => {
+  let valid = false;
+
+  for (let val of otp) {
+    valid = !isNaN(parseInt(val));
+    if (!valid) break;
+  }
+  return valid;
+};
+
 const EmailVerification = () => {
   const [otp, setOTP] = useState(new Array(OTP_Length).fill(""));
   const [activeOTPIndex, setActiveOTPIndex] = useState(0);
@@ -51,19 +61,27 @@ const EmailVerification = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!isValidOtp(otp)) return console.log("invalid otp");
+
+    console.log(otp)
+  };
+
   useEffect(() => {
     inputRef.current?.focus();
     // console.log(inputRef)
   }, [activeOTPIndex]);
 
-  useEffect(() => {
-    if (!user) navigate("/not-found");
-  }, [user]);
+  // useEffect(() => {
+  //   if (!user) navigate("/not-found");
+  // }, [user]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">
       <div className="card flex-shrink-0 w-full max-w-sm shadow-sm bg-base-200 rounded-md">
-        <form className="card-body p-6">
+        <form onSubmit={handleSubmit} className="card-body p-6">
           <h1 className="text-center text-xl font-semibold">
             Please enter OTP to verify account
           </h1>
@@ -81,8 +99,6 @@ const EmailVerification = () => {
                   onKeyDown={(e) => handleKeyDown(e, index)}
                   type="number"
                   className="input input-bordered spin-button-none w-12 text-center font-semibold xs:w-10 xs:h-10 xs:text-xs xs sm:w-10 sm:h-10 sm:text-xs"
-                  max={1}
-                  maxLength={1}
                 />
               );
             })}
@@ -97,7 +113,7 @@ const EmailVerification = () => {
           </label>
           <div className="form-control">
             <button className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs">
-              Submit
+              Verify account
             </button>
           </div>
         </form>
