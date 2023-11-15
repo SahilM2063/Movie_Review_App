@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { createUser } from "../../api/auth";
 
 const validateUserInfo = ({ name, email, password }) => {
   var isValidName = /^[a-z A-Z]+$/; // name checking regex
@@ -32,13 +33,15 @@ const SignUp = () => {
     setUserInfo({ ...userInfo, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { ok, error } = validateUserInfo(userInfo);
 
     if (!ok) return console.log(error);
 
-    console.log(userInfo);
+    const res = await createUser(userInfo);
+    if (res.error) return console.log(res.error);
+    console.log(res.user);
   };
 
   const { name, email, password } = userInfo;
