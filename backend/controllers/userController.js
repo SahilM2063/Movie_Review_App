@@ -36,7 +36,14 @@ const createUser = async (req, res) => {
         `
     });
     // sending response after sending OTP.
-    res.status(201).json({ message: "Please Verify Your Email. OTP Has Been Sent To Your Email Account." });
+    res.status(201).json(
+        {
+            user: {
+                id: newUser._id,
+                name: newUser.name,
+                email: newUser.email
+            }
+        });
 }
 
 // method for verify an email
@@ -192,7 +199,7 @@ const signIn = async (req, res) => {
     const matched = await user.comparePassword(password);
     if (!matched) return sendError(res, "Email or Password is invalid");
 
-    const jwtToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET) 
+    const jwtToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET)
 
     const { _id, name } = user
 
