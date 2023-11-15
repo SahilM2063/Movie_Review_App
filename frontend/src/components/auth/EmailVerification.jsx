@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const OTP_Length = 6;
 
@@ -9,6 +9,11 @@ const EmailVerification = () => {
   const [activeOTPIndex, setActiveOTPIndex] = useState(0);
 
   const inputRef = useRef();
+
+  const { state } = useLocation();
+  const user = state?.user;
+
+  const navigate = useNavigate();
 
   const handleOtpChange = ({ target }, index) => {
     const { value } = target;
@@ -50,6 +55,10 @@ const EmailVerification = () => {
     inputRef.current?.focus();
     // console.log(inputRef)
   }, [activeOTPIndex]);
+
+  useEffect(() => {
+    if (!user) navigate("/not-found");
+  }, [user]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">

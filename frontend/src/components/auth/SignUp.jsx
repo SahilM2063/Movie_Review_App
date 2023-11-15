@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../api/auth";
 
 const validateUserInfo = ({ name, email, password }) => {
@@ -22,6 +22,7 @@ const validateUserInfo = ({ name, email, password }) => {
 };
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
@@ -41,6 +42,11 @@ const SignUp = () => {
 
     const res = await createUser(userInfo);
     if (res.error) return console.log(res.error);
+
+    navigate("/auth/verification", {
+      state: { user: res.user },
+      replace: true,
+    });
     console.log(res.user);
   };
 
