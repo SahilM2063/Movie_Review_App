@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../api/auth";
+import { useNotification } from "../../hooks";
 
 const validateUserInfo = ({ name, email, password }) => {
   var isValidName = /^[a-z A-Z]+$/; // name checking regex
@@ -28,7 +29,7 @@ const SignUp = () => {
     email: "",
     password: "",
   });
-
+  const updateNotification = useNotification();
   const handleChange = ({ target }) => {
     const { name, value } = target;
     setUserInfo({ ...userInfo, [name]: value });
@@ -38,7 +39,7 @@ const SignUp = () => {
     e.preventDefault();
     const { ok, error } = validateUserInfo(userInfo);
 
-    if (!ok) return console.log(error);
+    if (!ok) return updateNotification("warning", error);
 
     const res = await createUser(userInfo);
     if (res.error) return console.log(res.error);

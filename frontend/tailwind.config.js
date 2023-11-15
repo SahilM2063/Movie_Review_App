@@ -1,4 +1,5 @@
-import daisyui from "daisyui"
+import daisyui from "daisyui";
+import React from '@vitejs/plugin-react';
 export default {
   content: [
     "./index.html",
@@ -26,7 +27,7 @@ export default {
     },
     extend: {},
   },
-  plugins: [daisyui],
+  plugins: [daisyui, React],
   daisyui: {
     themes: [
       {
