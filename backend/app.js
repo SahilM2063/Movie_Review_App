@@ -5,8 +5,10 @@ require("dotenv").config();
 const userRouter = require("./routes/userRoute.js");
 const { errorHandler } = require("./middlewares/errorHandler.js");
 require("./db")
+const cors = require("cors")
 
 const app = express();
+app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
 app.use("/api/user", userRouter)
