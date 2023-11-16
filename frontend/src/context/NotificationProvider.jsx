@@ -15,7 +15,7 @@ const NotificationProvider = ({ children }) => {
 
     switch (type) {
       case "error":
-        setClasses("error");
+        setClasses("alert-error");
         setIcon(
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ const NotificationProvider = ({ children }) => {
         );
         break;
       case "success":
-        setClasses("success");
+        setClasses("alert-success");
         setIcon(
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@ const NotificationProvider = ({ children }) => {
         );
         break;
       case "warning":
-        setClasses("warning");
+        setClasses("alert-warning");
         setIcon(
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +69,7 @@ const NotificationProvider = ({ children }) => {
         );
         break;
       default:
-        setClasses("info");
+        setClasses("alert-info");
         setIcon(
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +97,7 @@ const NotificationProvider = ({ children }) => {
       {children}
       {notification && (
         <div
-          className={`alert max-w-lg md:max-w-[50%] md:flex md:p-2 sm:max-w-[70%] sm:flex sm:p-3 xs:max-w-[80%] xs:flex xs:p-2 m-auto rounded-xl alert-${classes}`}
+          className={`alert max-w-lg md:max-w-[50%] md:flex md:p-2 sm:max-w-[70%] sm:flex sm:p-3 xs:max-w-[80%] xs:flex xs:p-2 m-auto rounded-xl ${classes}`}
         >
           {icon}
           <span>{notification}</span>

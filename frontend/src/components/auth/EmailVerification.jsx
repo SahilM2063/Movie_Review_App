@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { verifyUserEmail } from "../../api/auth";
+import { useNotification } from "../../hooks";
 
 const OTP_Length = 6;
 
@@ -25,6 +26,8 @@ const EmailVerification = () => {
   const user = state?.user;
 
   const navigate = useNavigate();
+
+  const updateNotification = useNotification();
 
   const handleOtpChange = ({ target }, index) => {
     const { value } = target;
@@ -72,9 +75,9 @@ const EmailVerification = () => {
       userId: user.id,
     });
 
-    if (error) return console.log(error);
+    if (error) return updateNotification("error", error);
 
-    console.log(message);
+    updateNotification("success", message);
   };
 
   useEffect(() => {

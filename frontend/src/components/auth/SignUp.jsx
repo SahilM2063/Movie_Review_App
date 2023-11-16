@@ -48,7 +48,7 @@ const SignUp = () => {
       state: { user: res.user },
       replace: true,
     });
-    console.log(res.user);
+    // console.log(res.user);
   };
 
   const { name, email, password } = userInfo;
