@@ -24,6 +24,7 @@ const NotificationProvider = ({ children }) => {
             viewBox="0 0 24 24"
           >
             <path
+              stroke="white"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
@@ -42,6 +43,7 @@ const NotificationProvider = ({ children }) => {
             viewBox="0 0 24 24"
           >
             <path
+              stroke="white"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
@@ -60,6 +62,7 @@ const NotificationProvider = ({ children }) => {
             viewBox="0 0 24 24"
           >
             <path
+              stroke="white"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
@@ -78,6 +81,7 @@ const NotificationProvider = ({ children }) => {
             className="stroke-current shrink-0 w-6 h-6"
           >
             <path
+              stroke="white"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
@@ -100,7 +104,7 @@ const NotificationProvider = ({ children }) => {
           className={`alert max-w-lg md:max-w-[50%] md:flex md:p-2 sm:max-w-[70%] sm:flex sm:p-3 xs:max-w-[80%] xs:flex xs:p-2 m-auto rounded-xl ${classes}`}
         >
           {icon}
-          <span>{notification}</span>
+          <span className="text-white">{notification}</span>
         </div>
       )}
     </NotificationContext.Provider>
