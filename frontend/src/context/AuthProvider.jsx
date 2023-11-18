@@ -13,7 +13,7 @@ const defaultAuthInfo = {
 };
 
 const AuthProvider = ({ children }) => {
-  const [authInfo, setAuthInfo] = useState(...defaultAuthInfo);
+  const [authInfo, setAuthInfo] = useState({ ...defaultAuthInfo });
 
   const handleLogin = async (email, password) => {
     setAuthInfo({ ...authInfo, isPending: true });

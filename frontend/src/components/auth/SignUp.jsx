@@ -29,7 +29,9 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+  
   const updateNotification = useNotification();
+
   const handleChange = ({ target }) => {
     const { name, value } = target;
     setUserInfo({ ...userInfo, [name]: value });
