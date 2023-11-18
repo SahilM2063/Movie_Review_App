@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth, useNotification } from "../../hooks";
 
@@ -24,9 +24,9 @@ const SignIn = () => {
   });
 
   const updateNotification = useNotification();
+  const navigate = useNavigate();
   const { handleLogin, authInfo } = useAuth();
-  const { isPending } = authInfo;
-  console.log(authInfo);
+  const { isPending, isLoggedIn } = authInfo;
 
   const handleChange = ({ target }) => {
     const { value, name } = target;
@@ -40,6 +40,10 @@ const SignIn = () => {
     if (!ok) return updateNotification("warning", error);
     handleLogin(userInfo.email, userInfo.password);
   };
+
+  useEffect(() => {
+    if (isLoggedIn) navigate("/");
+  }, [isLoggedIn]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">

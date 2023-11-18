@@ -5,6 +5,7 @@ import { LuSunMedium } from "react-icons/lu";
 import logoLight from "../../assets/logoLight.svg";
 import logoDark from "../../assets/logoDark.svg";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks";
 
 const Navbar = () => {
   const [theme, setTheme] = useState(
@@ -24,6 +25,9 @@ const Navbar = () => {
         : logoDark
       : true
   );
+
+  const { authInfo } = useAuth();
+  const { isLoggedIn } = authInfo;
 
   const toggleTheme = () => {
     setTheme(theme === "mytheme1" ? "lemonade" : "mytheme1");
@@ -109,12 +113,21 @@ const Navbar = () => {
             className="input input-bordered outline-none rounded-sm w-24 md:w-auto px-2 h-9 text-xs w-full"
           />
         </div>
-        <Link
-          to={"/auth/sign-in"}
-          className="btn px-3 min-h-8 h-9 rounded-sm text-xs"
-        >
-          Login
-        </Link>
+        {isLoggedIn ? (
+          <Link
+            to={"/auth/sign-in"}
+            className="btn px-3 min-h-8 h-9 rounded-sm text-xs"
+          >
+            Logout
+          </Link>
+        ) : (
+          <Link
+            to={"/auth/sign-in"}
+            className="btn px-3 min-h-8 h-9 rounded-sm text-xs"
+          >
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

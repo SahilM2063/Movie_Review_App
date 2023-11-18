@@ -1,9 +1,9 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../api/auth";
-import { useNotification } from "../../hooks";
+import { useAuth, useNotification } from "../../hooks";
 
 const validateUserInfo = ({ name, email, password }) => {
   var isValidName = /^[a-z A-Z]+$/; // name checking regex
@@ -29,8 +29,10 @@ const SignUp = () => {
     email: "",
     password: "",
   });
-  
+
   const updateNotification = useNotification();
+  const { authInfo } = useAuth();
+  const { isLoggedIn } = authInfo;
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -54,6 +56,10 @@ const SignUp = () => {
   };
 
   const { name, email, password } = userInfo;
+
+  useEffect(() => {
+    if (isLoggedIn) navigate("/");
+  }, [isLoggedIn]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">
