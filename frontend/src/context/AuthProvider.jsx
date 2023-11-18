@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { signInUser } from "../api/auth";
+import { getIsAuth, signInUser } from "../api/auth";
 
 export const AuthContext = createContext();
 
@@ -31,15 +31,33 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem("auth-token", user.token);
   };
 
-  const isAuth = () => {
+  const isAuth = async () => {
     const token = localStorage.getItem("auth-token");
     if (!token) return;
+
+    setAuthInfo({ ...authInfo, isPending: true });
+    const { error, user } = await getIsAuth(token);
+
+    if (error) {
+      return setAuthInfo({ ...authInfo, isPending: false, error });
+    }
+
+    setAuthInfo({
+      profile: { ...user },
+      isLoggedIn: true,
+      isPending: false,
+      error: "",
+    });
   };
+
+  useEffect(() => {
+    isAuth();
+  }, []);
 
   return (
     <AuthContext.Provider
       //  handleLogout, isAuth  <---- remaining
-      value={{ authInfo, handleLogin }}
+      value={{ authInfo, handleLogin, isAuth }}
     >
       {children}
     </AuthContext.Provider>
