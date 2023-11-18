@@ -28,7 +28,6 @@ const AuthProvider = ({ children }) => {
       isPending: false,
       error: "",
     });
-
     localStorage.setItem("auth-token", user.token);
   };
 

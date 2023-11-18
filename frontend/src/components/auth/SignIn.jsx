@@ -25,6 +25,7 @@ const SignIn = () => {
 
   const updateNotification = useNotification();
   const { handleLogin, authInfo } = useAuth();
+  const { isPending } = authInfo;
   console.log(authInfo);
 
   const handleChange = ({ target }) => {
@@ -91,7 +92,11 @@ const SignIn = () => {
           </div>
           <div className="form-control">
             <button className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs">
-              Sign In
+              {isPending ? (
+                <span className="loading loading-ring loading-md"></span>
+              ) : (
+                "SignIn"
+              )}
             </button>
           </div>
         </form>
