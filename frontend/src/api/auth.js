@@ -41,7 +41,10 @@ export const getIsAuth = async (token) => {
         const { data } = await client.get("/user/is-auth", {
             headers: {
                 Authorization: "Bearer " + token,
-                accept: "application/json"
+                accept: "application/json",
+                "Cache-Control": "no-cache", // or "max-age=0"
+                "If-None-Match": null,
+                "If-Modified-Since": null
             }
         });
         return data;

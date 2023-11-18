@@ -31,6 +31,11 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem("auth-token", user.token);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("auth-token");
+    setAuthInfo({ ...defaultAuthInfo });
+  };
+
   const isAuth = async () => {
     const token = localStorage.getItem("auth-token");
     if (!token) return;
@@ -56,8 +61,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      //  handleLogout, isAuth  <---- remaining
-      value={{ authInfo, handleLogin, isAuth }}
+      value={{ authInfo, handleLogin, handleLogout, isAuth }}
     >
       {children}
     </AuthContext.Provider>

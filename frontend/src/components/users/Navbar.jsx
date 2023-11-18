@@ -26,7 +26,7 @@ const Navbar = () => {
       : true
   );
 
-  const { authInfo } = useAuth();
+  const { authInfo, handleLogout } = useAuth();
   const { isLoggedIn } = authInfo;
 
   const toggleTheme = () => {
@@ -89,9 +89,25 @@ const Navbar = () => {
               className="input input-bordered outline-none rounded-sm w-24 md:w-auto px-2 h-9 text-xs w-full"
             />
           </div>
-          <button className="btn px-3 min-h-8 h-9 rounded-sm text-xs">
-            Login
-          </button>
+          {isLoggedIn ? (
+            <button
+              className="btn px-3 min-h-8 h-9 rounded-sm text-xs"
+              onClick={() => {
+                if (window.confirm("Do you want to logout ?")) {
+                  handleLogout();
+                }
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to={"/auth/sign-in"}
+              className="btn px-3 min-h-8 h-9 rounded-sm text-xs"
+            >
+              Login
+            </Link>
+          )}
         </ul>
       </div>
 
@@ -114,12 +130,16 @@ const Navbar = () => {
           />
         </div>
         {isLoggedIn ? (
-          <Link
-            to={"/auth/sign-in"}
+          <button
             className="btn px-3 min-h-8 h-9 rounded-sm text-xs"
+            onClick={() => {
+              if (window.confirm("Do you want to logout ?")) {
+                handleLogout();
+              }
+            }}
           >
             Logout
-          </Link>
+          </button>
         ) : (
           <Link
             to={"/auth/sign-in"}

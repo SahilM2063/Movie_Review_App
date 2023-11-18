@@ -9,11 +9,11 @@ export const useNotification = () => {
 };
 
 export const useAuth = () => {
-    const { handleLogin, authInfo } = useContext(AuthContext);
+    const { handleLogin, authInfo, handleLogout, isAuth } = useContext(AuthContext);
 
 
     return {
-        authInfo, handleLogin
+        authInfo, handleLogin, handleLogout, isAuth
     }
 };
 
