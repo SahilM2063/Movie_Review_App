@@ -5,6 +5,10 @@ import { verifyPasswordResetToken } from "../../api/auth";
 import { useNotification } from "../../hooks";
 
 const ResetPassword = () => {
+  const [password, setPassword] = useState({
+    one: "",
+    two: "",
+  });
   const [isVerifying, setIsVerifying] = useState(true);
   const [isValid, setIsValid] = useState(false);
   const [searchParams] = useSearchParams();
@@ -29,6 +33,26 @@ const ResetPassword = () => {
     }
 
     setIsValid(true);
+  };
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setPassword({ ...password, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!password.one.trim())
+      return updateNotification("error", "Password is missing");
+
+    if (password.one.trim().length < 8)
+      return updateNotification("error", "Password must be 8 characters long!");
+
+    if (password.one !== password.two)
+      return updateNotification("error", "Password do not match");
+
+    console.log(password);
   };
 
   useEffect(() => {
@@ -61,7 +85,7 @@ const ResetPassword = () => {
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">
       <div className="card flex-shrink-0 w-full max-w-sm shadow-sm bg-base-200 rounded-md">
-        <form className="card-body p-6">
+        <form onSubmit={handleSubmit} className="card-body p-6">
           <h1 className="text-center text-xl font-semibold">
             Reset your password
           </h1>
@@ -71,9 +95,11 @@ const ResetPassword = () => {
             </label>
             <input
               type="password"
+              name="one"
+              value={password.one}
+              onChange={handleChange}
               placeholder="new password"
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
-              required
             />
           </div>
           <div className="form-control">
@@ -82,9 +108,11 @@ const ResetPassword = () => {
             </label>
             <input
               type="password"
+              name="two"
+              value={password.two}
+              onChange={handleChange}
               placeholder="confirm password"
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
-              required
             />
           </div>
           <div className="form-control mt-4">
