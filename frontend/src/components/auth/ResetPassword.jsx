@@ -1,12 +1,28 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 const ResetPassword = () => {
+  const [isVerifying, setIsVerifying] = useState(true);
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   const id = searchParams.get("id");
-  console.log(token, id);
+
+  if (isVerifying) {
+    return (
+      <div className="fixed inset-0 flex flex-col gap-3 items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">
+        <h1 className="text-center text-xl">
+          Please wait , we are verifying your request
+        </h1>
+        <div className="flex items-center justify-center">
+          <span className="loading loading-ring loading-sm"></span>
+          <span className="loading loading-ring loading-md"></span>
+          <span className="loading loading-ring loading-lg"></span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">
       <div className="card flex-shrink-0 w-full max-w-sm shadow-sm bg-base-200 rounded-md">
