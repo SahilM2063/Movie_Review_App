@@ -3,12 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth, useNotification } from "../../hooks";
+import { isValidEmail } from "../../utils/helper";
 
 const validateUserInfo = ({ email, password }) => {
-  var isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; // email checking regex
-
   if (!email.trim()) return { ok: false, error: "Email is missing" };
-  if (!isValidEmail.test(email)) return { ok: false, error: "Invalid email" };
+  if (!isValidEmail(email)) return { ok: false, error: "Invalid email" };
 
   if (!password.trim()) return { ok: false, error: "Password is missing" };
   if (password.length < 8)
@@ -37,7 +36,7 @@ const SignIn = () => {
     e.preventDefault();
     const { ok, error } = validateUserInfo(userInfo);
     if (!ok) return updateNotification("warning", error);
-    
+
     handleLogin(userInfo.email, userInfo.password);
   };
 

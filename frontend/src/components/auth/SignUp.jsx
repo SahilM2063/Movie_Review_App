@@ -4,16 +4,16 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../api/auth";
 import { useAuth, useNotification } from "../../hooks";
+import { isValidEmail } from "../../utils/helper";
 
 const validateUserInfo = ({ name, email, password }) => {
   var isValidName = /^[a-z A-Z]+$/; // name checking regex
-  var isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; // email checking regex
 
   if (!name.trim()) return { ok: false, error: "Name is missing" };
   if (!isValidName.test(name)) return { ok: false, error: "Invalid name" };
 
   if (!email.trim()) return { ok: false, error: "Email is missing" };
-  if (!isValidEmail.test(email)) return { ok: false, error: "Invalid email" };
+  if (!isValidEmail(email)) return { ok: false, error: "Invalid email" };
 
   if (!password.trim()) return { ok: false, error: "Password is missing" };
   if (password.length < 8)
