@@ -18,7 +18,10 @@ const ResetPassword = () => {
     const { error, valid } = await verifyPasswordResetToken(token, id);
     setIsVerifying(false);
 
-    if (error) return updateNotification("error", error);
+    if (error) {
+      navigate("/auth/reset-password", { replace: true });
+      return updateNotification("error", error);
+    }
 
     if (!valid) {
       setIsValid(false);
@@ -83,16 +86,8 @@ const ResetPassword = () => {
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
               required
             />
-            <label className="label my-1">
-              <Link
-                to={"/auth/sign-in"}
-                className="label-text-alt link link-hover"
-              >
-                Sign in
-              </Link>
-            </label>
           </div>
-          <div className="form-control">
+          <div className="form-control mt-4">
             <button className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs">
               Submit
             </button>
