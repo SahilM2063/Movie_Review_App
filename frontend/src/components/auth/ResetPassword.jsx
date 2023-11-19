@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
-import { verifyPasswordResetToken } from "../../api/auth";
+import { resetPassword, verifyPasswordResetToken } from "../../api/auth";
 import { useNotification } from "../../hooks";
 
 const ResetPassword = () => {
@@ -40,7 +40,7 @@ const ResetPassword = () => {
     setPassword({ ...password, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!password.one.trim())
@@ -52,7 +52,16 @@ const ResetPassword = () => {
     if (password.one !== password.two)
       return updateNotification("error", "Password do not match");
 
-    console.log(password);
+    const { error, message } = await resetPassword({
+      newPassword: password.one,
+      userId: id,
+      token,
+    });
+
+    if (error) return updateNotification("error", error);
+
+    updateNotification("success", message);
+    navigate("/auth/sign-in", { replace: true });
   };
 
   useEffect(() => {

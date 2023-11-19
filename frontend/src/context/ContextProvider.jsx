@@ -6,9 +6,9 @@ import AuthProvider from "./AuthProvider";
 
 const ContextProvider = ({ children }) => {
   return (
-    <AuthProvider>
-      <NotificationProvider>{children}</NotificationProvider>
-    </AuthProvider>
+    <NotificationProvider>
+      <AuthProvider>{children}</AuthProvider>
+    </NotificationProvider>
   );
 };
 
