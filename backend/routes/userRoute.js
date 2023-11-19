@@ -11,7 +11,14 @@ userRouter.post("/create", userValidations, validate, createUser);
 userRouter.post("/sign-in", signInValidator, validate, signIn);
 userRouter.get("/is-auth", isAuth, (req, res) => {
     const { user } = req;
-    res.json({ user: { id: user._id, name: user.name, email: user.email } })
+    res.json({
+        user: {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            isVerified: user.isVerified
+        }
+    })
 });
 userRouter.post("/verify-email", verifyEmail);
 userRouter.post("/resend-email-verification-token", resendEmailVerificationToken);
