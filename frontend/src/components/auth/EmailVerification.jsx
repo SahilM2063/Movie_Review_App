@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { verifyUserEmail } from "../../api/auth";
-import { useNotification } from "../../hooks";
+import { useAuth, useNotification } from "../../hooks";
 
 const OTP_Length = 6;
 
@@ -28,6 +28,9 @@ const EmailVerification = () => {
   const navigate = useNavigate();
 
   const updateNotification = useNotification();
+
+  const { isAuth, authInfo } = useAuth();
+  const { isLoggedIn } = authInfo;
 
   const handleOtpChange = ({ target }, index) => {
     const { value } = target;
@@ -70,7 +73,11 @@ const EmailVerification = () => {
 
     if (!isValidOtp(otp)) return updateNotification("error", "Invalid otp");
 
-    const { error, message } = await verifyUserEmail({
+    const {
+      error,
+      message,
+      user: userResponse,
+    } = await verifyUserEmail({
       OTP: otp.join(""),
       userId: user.id,
     });
@@ -78,6 +85,8 @@ const EmailVerification = () => {
     if (error) return updateNotification("error", error);
 
     updateNotification("success", message);
+    localStorage.setItem("auth-token", userResponse.token);
+    isAuth();
   };
 
   useEffect(() => {
@@ -87,7 +96,8 @@ const EmailVerification = () => {
 
   useEffect(() => {
     if (!user) navigate("/not-found");
-  }, [user]);
+    if (isLoggedIn) navigate("/");
+  }, [user, isLoggedIn]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">

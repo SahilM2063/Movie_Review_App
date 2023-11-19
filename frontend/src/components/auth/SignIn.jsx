@@ -36,8 +36,8 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { ok, error } = validateUserInfo(userInfo);
-
     if (!ok) return updateNotification("warning", error);
+    
     handleLogin(userInfo.email, userInfo.password);
   };
 
