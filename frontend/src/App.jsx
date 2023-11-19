@@ -7,9 +7,9 @@ import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import EmailVerification from "./components/auth/EmailVerification";
 import ForgetPassword from "./components/auth/ForgetPassword";
-import ConfirmPassword from "./components/auth/ConfirmPassword";
 import Home from "./components/users/Home";
 import NotFound from "./components/users/NotFound";
+import ResetPassword from "./components/auth/ResetPassword";
 
 const App = () => {
   return (
@@ -21,7 +21,7 @@ const App = () => {
         <Route path="/auth/sign-up" element={<SignUp />} />
         <Route path="/auth/verification" element={<EmailVerification />} />
         <Route path="/auth/forget-password" element={<ForgetPassword />} />
-        <Route path="/auth/confirm-password" element={<ConfirmPassword />} />
+        <Route path="/auth/reset-password" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

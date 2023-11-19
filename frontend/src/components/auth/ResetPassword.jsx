@@ -1,8 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
-const ConfirmPassword = () => {
+const ResetPassword = () => {
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
+  const id = searchParams.get("id");
+  console.log(token, id);
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">
       <div className="card flex-shrink-0 w-full max-w-sm shadow-sm bg-base-200 rounded-md">
@@ -51,4 +55,4 @@ const ConfirmPassword = () => {
   );
 };
 
-export default ConfirmPassword;
+export default ResetPassword;
