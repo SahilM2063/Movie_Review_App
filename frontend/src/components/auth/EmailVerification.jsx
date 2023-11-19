@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { verifyUserEmail } from "../../api/auth";
+import { resendEmailVerificationToken, verifyUserEmail } from "../../api/auth";
 import { useAuth, useNotification } from "../../hooks";
 
 const OTP_Length = 6;
@@ -61,6 +61,14 @@ const EmailVerification = () => {
     setActiveOTPIndex(index + 1);
   };
 
+  const handleOTPResend = async () => {
+    const { error, message } = await resendEmailVerificationToken(user.id);
+
+    if (error) return updateNotification("error", error);
+
+    updateNotification("success", message);
+  };
+
   const handleKeyDown = ({ key }, index) => {
     if (key === "Backspace") {
       if (!otp[index] && index > 0) {
@@ -98,7 +106,7 @@ const EmailVerification = () => {
   useEffect(() => {
     if (!user) navigate("/not-found");
     if (isLoggedIn && isVerified) navigate("/");
-  }, [user, isLoggedIn]);
+  }, [user, isLoggedIn, isVerified]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">
@@ -132,9 +140,18 @@ const EmailVerification = () => {
             >
               Sign in
             </Link>
+            <a
+              onClick={handleOTPResend}
+              className="label-text-alt link link-hover"
+            >
+              Generate new OTP
+            </a>
           </label>
           <div className="form-control">
-            <button className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs">
+            <button
+              className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs"
+              type="submit"
+            >
               Verify account
             </button>
           </div>
