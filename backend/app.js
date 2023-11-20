@@ -7,12 +7,14 @@ const { errorHandler } = require("./middlewares/errorHandler.js");
 require("./db")
 const cors = require("cors");
 const { handleNotFound } = require("./utils/helper.js");
+const actorRouter = require("./routes/actorRoute.js");
 
 const app = express();
 app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
 app.use("/api/user", userRouter)
+app.use("/api/actor", actorRouter)
 
 app.use("/*", handleNotFound)
 
