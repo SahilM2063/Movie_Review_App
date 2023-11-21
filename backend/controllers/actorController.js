@@ -107,3 +107,14 @@ exports.deleteActor = async (req, res) => {
 
     res.json({ message: "Actor deleted successfully" })
 }
+
+exports.searchActor = async (req, res) => {
+    const { query } = req
+    const result = await Actor.find({
+        $text: {
+            $search: `"${query.name}"`
+        }
+    })
+
+    res.json(result)
+}
