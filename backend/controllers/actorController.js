@@ -45,7 +45,7 @@ exports.updateActor = async (req, res) => {
     if (!fetchedActor) return sendError(res, "Invalid request, actor not found", 404)
 
     const public_id = fetchedActor.avatar?.public_id
-    console.log(public_id)
+    // console.log(public_id)
 
     if (public_id && file) {
         const { result } = await cloudinary.uploader.destroy(public_id, {
@@ -82,4 +82,28 @@ exports.updateActor = async (req, res) => {
         gender,
         avatar: fetchedActor.avatar?.url
     })
+}
+
+
+exports.deleteActor = async (req, res) => {
+    const { actorId } = req.params
+
+    if (!isValidObjectId(actorId)) return sendError(res, "Invalid request")
+    const actor = await Actor.findById(actorId);
+    if (!actor) return sendError(res, "Invalid request, No actor found", 404)
+
+    const public_id = actor.avatar?.public_id
+    if (public_id) {
+        const { result } = await cloudinary.uploader.destroy(public_id, {
+            folder: "MVR_Actors"
+        })
+        console.log(result)
+        if (result !== 'ok') {
+            return sendError(res, "Could not delete image from cloud!")
+        }
+    }
+
+    await Actor.findByIdAndDelete(actorId)
+
+    res.json({ message: "Actor deleted successfully" })
 }
