@@ -5,6 +5,6 @@ const { actorInfoValidator, validate } = require("../middlewares/validator");
 
 const actorRouter = express.Router();
 
-actorRouter.post("/create-actor", actorInfoValidator, uploadImage.single('avatar'), validate, createActor)
+actorRouter.post("/create-actor", uploadImage.single('avatar'), actorInfoValidator, validate, createActor)
 
 module.exports = actorRouter;
