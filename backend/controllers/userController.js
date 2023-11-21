@@ -209,9 +209,9 @@ const signIn = async (req, res) => {
 
     const jwtToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET)
 
-    const { _id, name, isVerified } = user
+    const { _id, name, isVerified, role } = user
 
-    res.json({ user: { id: _id, name, email, token: jwtToken, isVerified } })
+    res.json({ user: { id: _id, name, email, token: jwtToken, isVerified, role } })
 }
 
 module.exports = { createUser, verifyEmail, resendEmailVerificationToken, forgetPassword, sendResetPasswordTokenStatus, resetPassword, signIn };

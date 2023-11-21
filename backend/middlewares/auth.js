@@ -18,3 +18,9 @@ exports.isAuth = async (req, res, next) => {
 
     next();
 }
+
+exports.isAdmin = (req, res, next) => {
+    const { user } = req;
+
+    if (user.role !== "admin") return sendError(res, "Unauthorized access", 401)
+}
