@@ -18,7 +18,11 @@ exports.createActor = async (req, res) => {
 
     if (file) {
         const { secure_url, public_id } = await cloudinary.uploader.upload(file.path, {
-            folder: "MVR_Actors"
+            folder: "MVR_Actors",
+            gravity: "face",
+            height: 500,
+            width: 500,
+            crop: "thumb"
         })
 
         newActor.avatar = { url: secure_url, public_id }
@@ -55,7 +59,11 @@ exports.updateActor = async (req, res) => {
 
     if (file) {
         const { secure_url, public_id } = await cloudinary.uploader.upload(file.path, {
-            folder: "MVR_Actors"
+            folder: "MVR_Actors",
+            gravity: "face",
+            height: 500,
+            width: 500,
+            crop: "thumb"
         });
         fetchedActor.avatar = { url: secure_url, public_id }
     }
