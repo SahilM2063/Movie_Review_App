@@ -123,3 +123,15 @@ exports.getLatestActors = async (req, res) => {
 
     res.json(result)
 }
+
+
+exports.getSingleActor = async (req, res) => {
+    const { actorId } = req.params
+
+
+    if (!isValidObjectId(actorId)) return sendError(res, "Invalid request")
+    const fetchedActor = await Actor.findById(actorId);
+    if (!fetchedActor) return sendError(res, "Invalid request, No actor found", 404)
+
+    res.json(fetchedActor)
+}
