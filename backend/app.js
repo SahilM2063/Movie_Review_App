@@ -8,6 +8,7 @@ require("./db")
 const cors = require("cors");
 const { handleNotFound } = require("./utils/helper.js");
 const actorRouter = require("./routes/actorRoute.js");
+const movieRouter = require("./routes/movieRoute.js");
 
 const app = express();
 app.use(cors())
@@ -15,6 +16,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use("/api/user", userRouter)
 app.use("/api/actor", actorRouter)
+app.use("/api/movie", movieRouter)
 
 app.use("/*", handleNotFound)
 
