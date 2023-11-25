@@ -57,7 +57,7 @@ const movieSchema = mongoose.Schema({
         public_id: { type: String, required: true },
         required: true
     },
-    trailerInfo: {
+    trailer: {
         type: Object,
         url: { type: String, required: true },
         public_id: { type: String, required: true },

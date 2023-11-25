@@ -1,5 +1,7 @@
 const { sendError } = require("../utils/helper");
 const cloudinary = require("cloudinary").v2;
+const Movie = require(".././models/movieModel.js");
+const { isValidObjectId } = require("mongoose");
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -37,6 +39,31 @@ exports.createMovie = async (req, res) => {
         trailer,
         language
     } = body;
+
+    const newMovie = new Movie({
+        title,
+        storyLine,
+        releaseDate,
+        status,
+        type,
+        genres,
+        tags,
+        cast,
+        trailer,
+        language
+    });
+
+    if (director) {
+        if (!isValidObjectId(director)) return sendError(res, "Invalid director id");
+        newMovie.director = director
+    }
+
+    if (writers) {
+        for (let wIds of writers) {
+            if (!isValidObjectId(wIds)) return sendError(res, "Invalid writer id");
+        }
+        newMovie.writers = writers
+    }
 
     console.log(typeof JSON.parse(req.body.trailerInfo))
     res.send("ok")
