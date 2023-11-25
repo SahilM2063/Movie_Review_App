@@ -36,7 +36,6 @@ exports.createMovie = async (req, res) => {
         poster,
         trailer,
         language
-    } = body
+    } = body;
 
-    
 }
