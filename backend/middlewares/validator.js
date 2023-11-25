@@ -37,19 +37,28 @@ exports.validate = (req, res, next) => {
         check('genres').isArray().withMessage("Genres must be an array of strings").custom((genre) => {
             for (let g of genre) {
                 if (!genres.includes(g)) throw Error('Invalid genres')
+
+                return true;
             }
+
         }),
         check('tags').isArray({ min: 1 }).withMessage("Tags must be an array of strings").custom((tags) => {
             for (let t of tags) {
                 if (typeof t !== 'string') throw Error("Invalid tags")
+
+                return true;
             }
+
         }),
         check('cast').isArray().withMessage("Cast must be an array of strings").custom((cast) => {
             for (let c of cast) {
                 if (!isValidObjectId(c.id)) throw Error('Invalid cast id')
                 if (!c.roleAs?.trim()) throw Error('roleAs missing in cast')
                 if (typeof c.leadActor !== 'boolean') throw Error('Only accepted boolean value inside leadActor inside cast')
+
+                return true;
             }
+
         }),
         check('trailerInfo').isObject().withMessage("TrailerInfo must be an object with url and public_id").custom(({ url, public_id }) => {
             try {
@@ -60,12 +69,17 @@ exports.validate = (req, res, next) => {
                 const publicId = arr[arr.length - 1].split('.')[0];
 
                 if (public_id !== publicId) throw Error('Trailer public_id is invalid!');
+
+                return true;
             } catch (error) {
                 throw Error('Trailer url is invalid')
             }
+
         }),
         check('poster').custom((_, { req }) => {
             if (!req.file) throw Error("Poster file is missing")
+
+            return true
         })
     ]
 
