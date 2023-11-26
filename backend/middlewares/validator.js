@@ -73,11 +73,11 @@ exports.validateMovie = [
             throw Error('Trailer url is invalid')
         }
     }),
-    // check('poster').custom((_, { req }) => {
-    //     if (!req.file || typeof req.file !== 'object') throw Error("Poster file is missing")
+    check('poster').custom((_, { req }) => {
+        if (!req.file || typeof req.file !== 'object') throw Error("Poster file is missing")
 
-    //     return true
-    // })
+        return true
+    })
 ]
 
 exports.validate = (req, res, next) => {

@@ -156,3 +156,95 @@ exports.updateMovieWithoutPoster = async (req, res) => {
     res.json({ "message": "Movie updated successfully", movie })
 
 }
+
+exports.updateMovieWithPoster = async (req, res) => {
+    const { movieId } = req.params;
+
+    if (!isValidObjectId(movieId)) return sendError(res, "Invalid movie id")
+
+    if (!req.file) return sendError(res, "Movie poster is missing")
+
+    const movie = await Movie.findById(movieId)
+
+    if (!movie) return sendError(res, "Movie not found", 404)
+
+    const {
+        title,
+        storyLine,
+        director,
+        releaseDate,
+        status,
+        type,
+        genres,
+        tags,
+        cast,
+        writers,
+        trailer,
+        language
+    } = req.body;
+
+    movie.title = title
+    movie.storyLine = storyLine
+    movie.releaseDate = releaseDate
+    movie.status = status
+    movie.type = type
+    movie.genres = genres
+    movie.tags = tags
+    movie.cast = cast
+    movie.trailer = trailer
+    movie.language = language
+
+    if (director) {
+        if (!isValidObjectId(director)) return sendError(res, "Invalid director id");
+        movie.director = director
+    }
+
+    if (writers) {
+        for (let wIds of writers) {
+            if (!isValidObjectId(wIds)) return sendError(res, "Invalid writer id");
+        }
+        movie.writers = writers
+    }
+
+    // adding poster
+    // removing poster from cloud if already existed
+    const posterId = movie.poster?.public_id
+    // console.log(posterId)
+    if (posterId && req.file) {
+        const { result } = await cloudinary.uploader.destroy(posterId, {
+            folder: "Movies posters"
+        })
+        if (result !== 'ok') return sendError(res, "Could not update poster at moment")
+    }
+
+    // uploading movie poster
+    const { secure_url, public_id, responsive_breakpoints } = await cloudinary.uploader.upload(req.file.path, {
+        folder: "Movies posters",
+        transformation: {
+            width: 1280,
+            height: 720
+        },
+        responsive_breakpoints: {
+            create_derived: true,
+            max_width: 640,
+            max_images: 3,
+
+        }
+    });
+
+    const finalPoster = { secure_url, public_id, responsive: [] }
+    const { breakpoints } = responsive_breakpoints[0]
+    if (breakpoints.length) {
+        for (let imgOBJ of breakpoints) {
+            const { secure_url } = imgOBJ
+            finalPoster.responsive.push(secure_url)
+        }
+    }
+
+    movie.poster = finalPoster
+
+
+    await movie.save()
+
+    res.json({ "message": "Movie updated successfully", movie })
+}
