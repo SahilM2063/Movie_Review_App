@@ -97,3 +97,9 @@ exports.createMovie = async (req, res) => {
         title,
     })
 }
+
+
+exports.updateMovieWithoutPoster = async (req, res) => {
+
+    
+}
