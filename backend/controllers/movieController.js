@@ -53,17 +53,35 @@ exports.createMovie = async (req, res) => {
         language
     });
 
-    if (director) {
-        if (!isValidObjectId(director)) return sendError(res, "Invalid director id");
-        newMovie.director = director
-    }
+    // if (director) {
+    //     if (!isValidObjectId(director)) return sendError(res, "Invalid director id");
+    //     newMovie.director = director
+    // }
 
-    if (writers) {
-        for (let wIds of writers) {
-            if (!isValidObjectId(wIds)) return sendError(res, "Invalid writer id");
+    // if (writers) {
+    //     for (let wIds of writers) {
+    //         if (!isValidObjectId(wIds)) return sendError(res, "Invalid writer id");
+    //     }
+    //     newMovie.writers = writers
+    // }
+
+    // uploading movie poster
+    const cloudRes = await cloudinary.uploader.upload(file.path, {
+        folder: "Movies posters",
+        transformation: {
+            width: 1280,
+            height: 720
+        },
+        responsive_breakpoints: {
+            create_derived: true,
+            max_width: 640,
+            max_images: 3,
+
         }
-        newMovie.writers = writers
-    }
+    });
+
+    console.log(cloudRes)
+    console.log(cloudRes.responsive_breakpoints[0].breakpoints)
 
     console.log(typeof JSON.parse(req.body.trailerInfo))
     res.send("ok")

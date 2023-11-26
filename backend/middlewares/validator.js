@@ -40,7 +40,6 @@ exports.validate = (req, res, next) => {
 
                 return true;
             }
-
         }),
         check('tags').isArray({ min: 1 }).withMessage("Tags must be an array of strings").custom((tags) => {
             for (let t of tags) {
@@ -48,7 +47,6 @@ exports.validate = (req, res, next) => {
 
                 return true;
             }
-
         }),
         check('cast').isArray().withMessage("Cast must be an array of strings").custom((cast) => {
             for (let c of cast) {
@@ -58,7 +56,6 @@ exports.validate = (req, res, next) => {
 
                 return true;
             }
-
         }),
         check('trailer').isObject().withMessage("Trailer must be an object with url and public_id").custom(({ url, public_id }) => {
             try {
@@ -74,7 +71,6 @@ exports.validate = (req, res, next) => {
             } catch (error) {
                 throw Error('Trailer url is invalid')
             }
-
         }),
         check('poster').custom((_, { req }) => {
             if (!req.file) throw Error("Poster file is missing")
