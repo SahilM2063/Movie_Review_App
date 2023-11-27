@@ -64,7 +64,8 @@ exports.validateMovie = [
             if (!res.protocol.includes('http')) throw Error('Trailer url is invalid');
 
             const arr = url.split('/')
-            const publicId = arr[arr.length - 1].split('.')[0];
+            const publicId =  'Movies trailers/' + arr[arr.length - 1].split('.')[0];
+            console.log(publicId)
 
             if (public_id !== publicId) throw Error('Trailer public_id is invalid!');
 

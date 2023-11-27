@@ -209,8 +209,8 @@ exports.updateMovieWithPoster = async (req, res) => {
     // adding poster
     // removing poster from cloud if already existed
     const posterId = movie.poster?.public_id
-    // console.log(posterId)
-    if (posterId && req.file) {
+    console.log(posterId)
+    if (posterId) {
         const { result } = await cloudinary.uploader.destroy(posterId, {
             folder: "Movies posters"
         })
@@ -247,4 +247,45 @@ exports.updateMovieWithPoster = async (req, res) => {
     await movie.save()
 
     res.json({ "message": "Movie updated successfully", movie })
+}
+
+
+exports.deleteMovie = async (req, res) => {
+    const { movieId } = req.params
+
+    if (!isValidObjectId(movieId)) return sendError(res, "Invalid movie id");
+
+    const movie = await Movie.findById(movieId)
+
+    if (!movie) return sendError(res, "Movie not found", 404)
+
+    const posterId = movie.poster?.public_id
+    // console.log(posterId)
+    if (posterId) {
+        const { result } = await cloudinary.uploader.destroy(posterId, {
+            folder: "Movies posters"
+        })
+        // console.log(result)
+        if (result !== 'ok') {
+            return sendError(res, "Can not delete poster")
+        }
+    }
+
+    const trailerId = movie.trailer?.public_id
+    if (!trailerId) {
+        return sendError(res, "could not find trailer")
+    }
+    // console.log(trailerId)
+    const { result } = await cloudinary.uploader.destroy(trailerId, {
+        // folder: "Movies trailers",
+        resource_type: "video"
+    })
+    // console.log(result)
+    if (result !== 'ok') {
+        return sendError(res, "can not delete trailer")
+    }
+
+    await Movie.findByIdAndDelete(movieId);
+
+    res.json({ message: "Movie deleted successfully" })
 }
