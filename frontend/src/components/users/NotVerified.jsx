@@ -7,7 +7,7 @@ const NotVerified = () => {
   const { authInfo } = useAuth();
   const { isLoggedIn } = authInfo;
   const isVerified = authInfo.profile?.isVerified;
-  console.log(authInfo);
+  // console.log(authInfo);
 
   const navigate = useNavigate();
 

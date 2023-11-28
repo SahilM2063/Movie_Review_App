@@ -10,8 +10,12 @@ import ForgetPassword from "./components/auth/ForgetPassword";
 import Home from "./components/users/Home";
 import NotFound from "./components/users/NotFound";
 import ResetPassword from "./components/auth/ResetPassword";
+import { useAuth } from "./hooks";
 
 const App = () => {
+  const { authInfo } = useAuth();
+  console.log(authInfo);
+
   return (
     <Router>
       <Navbar />
