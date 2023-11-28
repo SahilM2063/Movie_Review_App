@@ -3,12 +3,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import NotificationProvider from "./NotificationProvider";
 import AuthProvider from "./AuthProvider";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const ContextProvider = ({ children }) => {
   return (
-    <NotificationProvider>
-      <AuthProvider>{children}</AuthProvider>
-    </NotificationProvider>
+    <Router>
+      <NotificationProvider>
+        <AuthProvider>{children}</AuthProvider>
+      </NotificationProvider>
+    </Router>
   );
 };
 

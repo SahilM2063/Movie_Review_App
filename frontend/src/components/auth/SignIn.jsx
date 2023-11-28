@@ -23,7 +23,7 @@ const SignIn = () => {
   });
 
   const updateNotification = useNotification();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { handleLogin, authInfo } = useAuth();
   const { isPending, isLoggedIn } = authInfo;
 
@@ -40,9 +40,9 @@ const SignIn = () => {
     handleLogin(userInfo.email, userInfo.password);
   };
 
-  useEffect(() => {
-    if (isLoggedIn) navigate("/");
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) navigate("/");
+  // }, [isLoggedIn]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center -z-10 px-10 md:px-5 sm:px-2 xs:px-1">

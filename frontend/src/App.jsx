@@ -21,7 +21,7 @@ const App = () => {
   if (isAdmin) return <AdminNavigator />;
 
   return (
-    <Router>
+    <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/auth/reset-password" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </Router>
+    </>
   );
 };
 
