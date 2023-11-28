@@ -11,12 +11,15 @@ import Home from "./components/users/Home";
 import NotFound from "./components/users/NotFound";
 import ResetPassword from "./components/auth/ResetPassword";
 import { useAuth } from "./hooks";
+import AdminNavigator from "./navigators/AdminNavigator";
 
 const App = () => {
   const { authInfo } = useAuth();
   // console.log(authInfo);
   const isAdmin = authInfo.profile?.role === "admin";
-  console.log(isAdmin);
+
+  if (isAdmin) return <AdminNavigator />;
+
   return (
     <Router>
       <Navbar />
