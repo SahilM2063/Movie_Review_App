@@ -14,8 +14,9 @@ import { useAuth } from "./hooks";
 
 const App = () => {
   const { authInfo } = useAuth();
-  console.log(authInfo);
-
+  // console.log(authInfo);
+  const isAdmin = authInfo.profile?.role === "admin";
+  console.log(isAdmin);
   return (
     <Router>
       <Navbar />
