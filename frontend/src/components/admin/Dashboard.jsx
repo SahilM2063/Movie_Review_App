@@ -3,12 +3,11 @@ import React, { useState } from "react";
 import logoLight from "../../assets/logoLight.svg";
 import logoDark from "../../assets/logoDark.svg";
 import { Link } from "react-router-dom";
+import { GoHome } from "react-icons/go";
+import { BiMoviePlay } from "react-icons/bi";
+import { MdOutlineRecentActors } from "react-icons/md";
 
 const Dashboard = () => {
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ?? "mytheme1"
-  );
-
   const [Logo, setLogo] = useState(
     localStorage.getItem("theme")
       ? localStorage.getItem("theme") === "mytheme1"
@@ -36,14 +35,17 @@ const Dashboard = () => {
             />
             {/* <h1 className="text-3xl font-bold">CineViewPoint</h1> */}
           </Link>
-          <Link to={"/"} className="self-center text-md mt-6">
-            Home
+          <Link to={"/"} className="mt-6 flex items-center gap-2 ml-2">
+            <GoHome className="text-lg" />
+            <span className="text-md">Home</span>
           </Link>
-          <Link to={"/movies"} className="self-center text-md">
-            Movies
+          <Link to={"/movies"} className="flex gap-2 items-center ml-2">
+            <BiMoviePlay className="text-lg" />
+            <span className="text-md">Movies</span>
           </Link>
-          <Link to={"/actors"} className="self-center text-md">
-            Actors
+          <Link to={"/actors"} className="flex gap-2 items-center ml-2">
+            <MdOutlineRecentActors className="text-lg" />
+            <span className="text-md">Actors</span>
           </Link>
         </ul>
       </div>
