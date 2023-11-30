@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { GoHome } from "react-icons/go";
 import { BiMoviePlay } from "react-icons/bi";
 import { MdOutlineRecentActors } from "react-icons/md";
+import { FiLogOut } from "react-icons/fi";
 
 const Dashboard = () => {
   const [Logo, setLogo] = useState(
@@ -47,6 +48,13 @@ const Dashboard = () => {
             <MdOutlineRecentActors className="text-lg" />
             <span className="text-md">Actors</span>
           </Link>
+          <div className="absolute bottom-2 flex flex-col gap-2">
+            <span className="text-xl font-semibold">Admin</span>
+            <button className="btn bg-base-300 text-sm self-start">
+              <FiLogOut />
+              <span>Log out</span>
+            </button>
+          </div>
         </ul>
       </div>
     </div>
