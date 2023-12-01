@@ -21,15 +21,9 @@ const AdminNavbar = () => {
   const { handleLogout } = useAuth();
 
   return (
-    <div className="drawer drawer-open">
+    <div className="drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-center"></div>
       <div className="drawer-side">
-        <label
-          htmlFor="my-drawer-2"
-          aria-label="close sidebar"
-          className="drawer-overlay"
-        ></label>
         <ul className="menu p-4 w-[13rem] min-h-full bg-base-200 text-base-content gap-4">
           <Link to={"/"} className="w-[30%]">
             <img
@@ -54,8 +48,12 @@ const AdminNavbar = () => {
           <div className="absolute bottom-2 flex flex-col gap-2">
             <span className="text-xl font-semibold">Admin</span>
             <button
-              onClick={handleLogout}
-              className="btn bg-base-300 text-sm self-start"
+              onClick={() => {
+                if (window.confirm("Are you sure ?")) {
+                  handleLogout();
+                }
+              }}
+              className="btn px-3 min-h-8 h-9 rounded-sm self-start bg-base-300"
             >
               <FiLogOut />
               <span>Log out</span>
