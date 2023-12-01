@@ -7,6 +7,7 @@ import { GoHome } from "react-icons/go";
 import { BiMoviePlay } from "react-icons/bi";
 import { MdOutlineRecentActors } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
+import { useAuth } from "../../hooks";
 
 const AdminNavbar = () => {
   const [Logo, setLogo] = useState(
@@ -16,6 +17,8 @@ const AdminNavbar = () => {
         : logoDark
       : true
   );
+
+  const { handleLogout } = useAuth();
 
   return (
     <div className="drawer drawer-open">
@@ -50,7 +53,10 @@ const AdminNavbar = () => {
           </Link>
           <div className="absolute bottom-2 flex flex-col gap-2">
             <span className="text-xl font-semibold">Admin</span>
-            <button className="btn bg-base-300 text-sm self-start">
+            <button
+              onClick={handleLogout}
+              className="btn bg-base-300 text-sm self-start"
+            >
               <FiLogOut />
               <span>Log out</span>
             </button>
