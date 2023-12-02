@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logoLight from "../../assets/logoLight.svg";
 import logoDark from "../../assets/logoDark.svg";
 import { Link } from "react-router-dom";
