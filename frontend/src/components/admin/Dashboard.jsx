@@ -48,15 +48,15 @@ const Dashboard = () => {
         </div>
         <details className="dropdown">
           <summary className="btn px-3 min-h-8 h-9 rounded-sm">
-            <span className="text-xs">create</span>
+            <span className="text-xs">CREATE</span>
             <FiPlus />
           </summary>
           <ul className="p-2 shadow menu dropdown-content z-[1] mt-2 gap-1 bg-base-100 rounded-sm w-36">
             <li>
-              <button>Add Movie</button>
+              <button>Add movie</button>
             </li>
             <li>
-              <button>Add Actor</button>
+              <button>Add actor</button>
             </li>
           </ul>
         </details>
