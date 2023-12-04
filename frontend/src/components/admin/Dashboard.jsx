@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { FiPlus } from "react-icons/fi";
+// import { FiPlus } from "react-icons/fi";
 import { HiOutlineMoon } from "react-icons/hi2";
 import { LuSunMedium } from "react-icons/lu";
 
@@ -50,8 +50,9 @@ const Dashboard = ({ ToggleTheme }) => {
         </div>
         <details className="dropdown">
           <summary className="btn px-3 min-h-8 h-9 rounded-sm">
-            <span className="text-xs">CREATE</span>
-            <FiPlus />
+            <span className="text-xs items-center flex gap-1">
+              CREATE <span className="text-lg">+</span>
+            </span>
           </summary>
           <ul className="p-2 shadow menu dropdown-content z-[1] mt-2 gap-1 bg-base-100 rounded-sm w-36">
             <li>

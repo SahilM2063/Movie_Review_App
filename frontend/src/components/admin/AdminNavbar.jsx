@@ -9,6 +9,7 @@ import { BiMoviePlay } from "react-icons/bi";
 import { MdOutlineRecentActors } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { useAuth } from "../../hooks";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const AdminNavbar = ({ theme }) => {
   const [Logo, setLogo] = useState(
@@ -30,17 +31,28 @@ const AdminNavbar = ({ theme }) => {
   const { handleLogout } = useAuth();
 
   return (
-    <div className="drawer-open">
-      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+    <div className="drawer">
+      <label
+        htmlFor="my-drawer"
+        className="btn btn-primary drawer-button absolute top-1 left-1 rounded-sm bg-transparent border-0 text-lg absolute"
+      >
+        <RxHamburgerMenu />
+      </label>
+      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content">{/* Page content here */}</div>
       <div className="drawer-side">
-        <ul className="menu p-4 w-[13rem] min-h-full bg-base-200 text-base-content gap-4">
+        <label
+          htmlFor="my-drawer"
+          aria-label="close sidebar"
+          className="drawer-overlay"
+        ></label>
+        <ul className="menu p-4 w-[20%] lg:w-[24%] md:w-[48%] sm:w-[58%] xs:w-[68%]  min-h-full bg-base-200 text-base-content gap-6">
           <Link to={"/"} className="w-[30%]">
             <img
               src={Logo}
               alt="logo"
               className="max-w-[130px] cursor-pointer"
             />
-            {/* <h1 className="text-3xl font-bold">CineViewPoint</h1> */}
           </Link>
           <Link to={"/"} className="mt-6 flex items-center gap-2 ml-2">
             <GoHome className="text-lg" />
