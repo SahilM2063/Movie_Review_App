@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { HiOutlineMoon } from "react-icons/hi2";
 import { LuSunMedium } from "react-icons/lu";
 
-const Dashboard = () => {
+const Dashboard = ({ ToggleTheme }) => {
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ?? "mytheme1"
   );
@@ -28,7 +29,7 @@ const Dashboard = () => {
   }, [theme]);
   return (
     <div className="flex w-full p-2">
-      <div className="topbar flex w-full justify-end gap-2 h-10">
+      <div className="topbar flex w-full justify-start gap-2 h-10">
         <div className="form-control">
           <input
             type="text"
@@ -43,6 +44,7 @@ const Dashboard = () => {
             className="toggle toggle-md"
             checked={themeTgBtn}
             onChange={toggleTheme}
+            onClick={ToggleTheme}
           />
           <HiOutlineMoon className="cursor-pointer text-xl w-full" />
         </div>

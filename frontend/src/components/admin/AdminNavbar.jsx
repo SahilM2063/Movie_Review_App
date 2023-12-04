@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import logoLight from "../../assets/logoLight.svg";
@@ -9,7 +10,7 @@ import { MdOutlineRecentActors } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { useAuth } from "../../hooks";
 
-const AdminNavbar = () => {
+const AdminNavbar = ({ theme }) => {
   const [Logo, setLogo] = useState(
     localStorage.getItem("theme")
       ? localStorage.getItem("theme") === "mytheme1"
@@ -17,6 +18,14 @@ const AdminNavbar = () => {
         : logoDark
       : true
   );
+
+  useEffect(() => {
+    setLogo(getLogoBasedOnTheme(theme));
+  }, [theme]);
+
+  const getLogoBasedOnTheme = (currentTheme) => {
+    return currentTheme === "mytheme1" ? logoLight : logoDark;
+  };
 
   const { handleLogout } = useAuth();
 
