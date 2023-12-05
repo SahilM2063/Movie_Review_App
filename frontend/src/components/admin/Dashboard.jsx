@@ -34,7 +34,7 @@ const Dashboard = ({ ToggleTheme }) => {
           <input
             type="text"
             placeholder="Search..."
-            className="input input-bordered outline-none rounded-sm w-24 md:w-auto px-2 h-9 text-xs w-full"
+            className="input input-bordered outline-none rounded-sm md:w-auto px-2 h-9 text-xs w-full"
           />
         </div>
         <div className="flex items-center gap-1 xs:gap-[0.10rem] sm:gap-[0.15rem]">

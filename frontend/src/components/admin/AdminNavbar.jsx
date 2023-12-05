@@ -39,7 +39,7 @@ const AdminNavbar = ({ theme }) => {
         <RxHamburgerMenu />
       </label>
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">{/* Page content here */}</div>
+      <div className="drawer-content"></div>
       <div className="drawer-side">
         <label
           htmlFor="my-drawer"
