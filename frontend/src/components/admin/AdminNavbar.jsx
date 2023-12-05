@@ -31,10 +31,10 @@ const AdminNavbar = ({ theme }) => {
   const { handleLogout } = useAuth();
 
   return (
-    <div className="drawer">
+    <div className="drawer w-[10%] mr-4">
       <label
         htmlFor="my-drawer"
-        className="btn btn-primary drawer-button absolute top-1 left-1 rounded-sm bg-transparent border-0 text-lg absolute"
+        className="btn drawer-button top-2 left-1 bg-transparent border-0 text-lg absolute px-3 min-h-8 h-9 rounded-sm"
       >
         <RxHamburgerMenu />
       </label>
@@ -46,7 +46,7 @@ const AdminNavbar = ({ theme }) => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-[20%] lg:w-[24%] md:w-[48%] sm:w-[58%] xs:w-[68%]  min-h-full bg-base-200 text-base-content gap-6">
+        <ul className="menu p-4 w-[20%] lg:w-[24%] md:w-[40%] sm:w-[56%] xs:w-[58%]  min-h-full bg-base-200 text-base-content gap-6">
           <Link to={"/"} className="w-[30%]">
             <img
               src={Logo}

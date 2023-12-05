@@ -29,7 +29,7 @@ const Dashboard = ({ ToggleTheme }) => {
   }, [theme]);
   return (
     <div className="flex w-full p-2">
-      <div className="topbar flex w-full justify-start gap-2 h-10">
+      <div className="topbar flex w-full justify-end gap-2 h-10">
         <div className="form-control">
           <input
             type="text"
@@ -37,16 +37,16 @@ const Dashboard = ({ ToggleTheme }) => {
             className="input input-bordered outline-none rounded-sm w-24 md:w-auto px-2 h-9 text-xs w-full"
           />
         </div>
-        <div className="flex items-center gap-1">
-          <LuSunMedium className="cursor-pointer text-xl w-full" />
+        <div className="flex items-center gap-1 xs:gap-[0.10rem] sm:gap-[0.15rem]">
+          <LuSunMedium className="cursor-pointer text-xl w-[16px]" />
           <input
             type="checkbox"
-            className="toggle toggle-md"
+            className="toggle toggle-md xs:toggle-xs sm:toggle-sm "
             checked={themeTgBtn}
             onChange={toggleTheme}
             onClick={ToggleTheme}
           />
-          <HiOutlineMoon className="cursor-pointer text-xl w-full" />
+          <HiOutlineMoon className="cursor-pointer text-xl w-[16px]" />
         </div>
         <details className="dropdown">
           <summary className="btn px-3 min-h-8 h-9 rounded-sm">
