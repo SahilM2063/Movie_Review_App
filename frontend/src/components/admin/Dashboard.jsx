@@ -51,15 +51,15 @@ const Dashboard = ({ ToggleTheme }) => {
         <details className="dropdown">
           <summary className="btn px-3 min-h-8 h-9 rounded-sm">
             <span className="text-xs items-center flex gap-1">
-              CREATE <span className="text-lg">+</span>
+              Create <span className="text-lg">+</span>
             </span>
           </summary>
           <ul className="p-2 shadow menu dropdown-content z-[1] mt-2 gap-1 bg-base-100 rounded-sm w-36">
             <li>
-              <button>Add movie</button>
+              <button>Add Movie</button>
             </li>
             <li>
-              <button>Add actor</button>
+              <button>Add Actor</button>
             </li>
           </ul>
         </details>
