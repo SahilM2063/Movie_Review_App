@@ -2,9 +2,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 // import { FiPlus } from "react-icons/fi";
-import { Link } from "react-router-dom";
 import { HiOutlineMoon } from "react-icons/hi2";
 import { LuSunMedium } from "react-icons/lu";
+import { IoCloudUploadOutline } from "react-icons/io5";
+import { FileUploader } from "react-drag-drop-files";
 
 const Dashboard = ({ ToggleTheme }) => {
   const [theme, setTheme] = useState(
@@ -77,7 +78,12 @@ const Dashboard = ({ ToggleTheme }) => {
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
-            
+            <FileUploader>
+              <div className="w-40 h-40 border-dashed border rounded-full m-auto flex items-center justify-center cursor-pointer flex-col">
+                <IoCloudUploadOutline size={44} />
+                <p className="text-xs">Drop your file here!</p>
+              </div>
+            </FileUploader>
           </form>
         </div>
       </dialog>
