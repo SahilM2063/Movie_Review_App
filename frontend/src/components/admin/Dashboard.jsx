@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 // import { FiPlus } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import { HiOutlineMoon } from "react-icons/hi2";
 import { LuSunMedium } from "react-icons/lu";
 
@@ -54,9 +55,15 @@ const Dashboard = ({ ToggleTheme }) => {
               Create <span className="text-lg">+</span>
             </span>
           </summary>
-          <ul className="p-2 shadow menu dropdown-content z-[1] mt-2 gap-1 bg-base-100 rounded-sm w-36">
+          <ul className="p-2 shadow menu right-0 dropdown-content z-[1] mt-2 gap-1 bg-base-100 rounded-sm w-36">
             <li>
-              <button>Add Movie</button>
+              <button
+                onClick={() =>
+                  document.getElementById("Movie_model").showModal()
+                }
+              >
+                Add Movie
+              </button>
             </li>
             <li>
               <button>Add Actor</button>
@@ -64,6 +71,16 @@ const Dashboard = ({ ToggleTheme }) => {
           </ul>
         </details>
       </div>
+      <dialog id="Movie_model" className="modal">
+        <div className="modal-box rounded-sm">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+            
+          </form>
+        </div>
+      </dialog>
     </div>
   );
 };
