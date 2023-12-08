@@ -81,7 +81,7 @@ const Dashboard = ({ ToggleTheme }) => {
             <FileUploader>
               <div className="w-40 h-40 border-dashed border rounded-full m-auto flex items-center justify-center cursor-pointer flex-col">
                 <IoCloudUploadOutline size={44} />
-                <p className="text-xs">Drop your file here!</p>
+                <p className="text-xs">Drop Your File Here!</p>
               </div>
             </FileUploader>
           </form>
