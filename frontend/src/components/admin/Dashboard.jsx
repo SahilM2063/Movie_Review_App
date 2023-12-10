@@ -7,6 +7,7 @@ import { HiOutlineMoon } from "react-icons/hi2";
 import { LuSunMedium } from "react-icons/lu";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { FileUploader } from "react-drag-drop-files";
+import { uploadTrailer } from "../../api/movie";
 
 const Dashboard = ({ ToggleTheme }) => {
   const updateNotification = useNotification();
@@ -27,8 +28,11 @@ const Dashboard = ({ ToggleTheme }) => {
     setThemeTgBtn(theme === "mytheme1" ? false : true);
   };
 
-  const handleChange = (file) => {
-    console.log(file);
+  const handleChange = async (file) => {
+    const formData = new FormData();
+    formData.append("trailer", file);
+    const res = await uploadTrailer(formData);
+    console.log(res);
   };
 
   const handleTypeError = (error) => {
