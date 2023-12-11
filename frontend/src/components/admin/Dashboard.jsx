@@ -71,6 +71,7 @@ const Dashboard = ({ ToggleTheme }) => {
           </ul>
         </details>
       </div>
+
       <TrailerUploadModal id={"Movie_model"} className={"modal"} />
     </div>
   );
