@@ -6,7 +6,7 @@ const ProgressBar = ({ progress, visible }) => {
   if (!visible) return null;
 
   return (
-    <div className="w-full flex flex-col gap-2 items-center">
+    <div className="w-full flex flex-col gap-2 items-center mt-2">
       <progress
         className="progress w-full"
         value={progress}

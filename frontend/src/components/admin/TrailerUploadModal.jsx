@@ -1,20 +1,19 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { FileUploader } from "react-drag-drop-files";
 import { uploadTrailer } from "../../api/movie";
 import { useNotification } from "../../hooks";
 import ProgressBar from "./ProgressBar";
 
-const progress = 23;
-
 const TrailerUploadModal = () => {
+  const [uploadProgress, setUploadProgress] = useState(0);
   const updateNotification = useNotification();
 
   const handleChange = async (file) => {
     const formData = new FormData();
     formData.append("trailer", file);
-    const res = await uploadTrailer(formData);
+    const res = await uploadTrailer(formData, setUploadProgress);
     console.log(res);
   };
 
@@ -22,6 +21,8 @@ const TrailerUploadModal = () => {
     console.log(error);
     updateNotification("error", error);
   };
+
+  useEffect(() => {}, [uploadProgress]);
   return (
     <>
       <dialog id="Movie_model" className="modal">
@@ -42,7 +43,7 @@ const TrailerUploadModal = () => {
                 </p>
               </div>
             </FileUploader>
-            <ProgressBar progress={progress} visible />
+            <ProgressBar progress={uploadProgress} visible />
           </form>
         </div>
       </dialog>
