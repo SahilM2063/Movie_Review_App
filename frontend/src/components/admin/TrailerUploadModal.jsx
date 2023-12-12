@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
@@ -6,15 +7,23 @@ import { uploadTrailer } from "../../api/movie";
 import { useNotification } from "../../hooks";
 import ProgressBar from "./ProgressBar";
 
-const TrailerUploadModal = () => {
+export default function TrailerUploadModal() {
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [videoUploaded, setVideoUploaded] = useState(false);
+  const [videoSelected, setVideoSelected] = useState(false);
   const updateNotification = useNotification();
 
   const handleChange = async (file) => {
     const formData = new FormData();
     formData.append("trailer", file);
+
+    setVideoSelected(true);
+
     const res = await uploadTrailer(formData, setUploadProgress);
     console.log(res);
+    if (!res.error) {
+      setVideoUploaded(true);
+    }
   };
 
   const handleTypeError = (error) => {
@@ -22,33 +31,52 @@ const TrailerUploadModal = () => {
     updateNotification("error", error);
   };
 
-  useEffect(() => {}, [uploadProgress]);
+  const getUploadProgressValue = () => {
+    if (!videoUploaded && uploadProgress >= 100) {
+      return "Processing...";
+    }
+
+    return `Upload progress ${uploadProgress}%`;
+  };
+
+  return (
+    <dialog id="Movie_model" className="modal">
+      <div className="modal-box rounded-sm">
+        <form method="dialog">
+          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            ✕
+          </button>
+          <TrailerSelector
+            visible={!videoSelected}
+            onTypeError={handleTypeError}
+            handleChange={handleChange}
+          />
+          <ProgressBar
+            progress={uploadProgress}
+            message={getUploadProgressValue()}
+            visible={!videoUploaded && videoSelected}
+          />
+        </form>
+      </div>
+    </dialog>
+  );
+}
+
+const TrailerSelector = ({ visible, handleChange, onTypeError }) => {
+  if (!visible) return null;
+
   return (
     <>
-      <dialog id="Movie_model" className="modal">
-        <div className="modal-box rounded-sm">
-          <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              ✕
-            </button>
-            <FileUploader
-              handleChange={handleChange}
-              onTypeError={handleTypeError}
-              types={["mp4", "avi"]}
-            >
-              <div className="w-40 h-40 border-dashed border rounded-full m-auto flex items-center justify-center cursor-pointer flex-col">
-                <IoCloudUploadOutline size={44} />
-                <p className="text-xs text-center">
-                  Drag and Drop Your File Here!
-                </p>
-              </div>
-            </FileUploader>
-            <ProgressBar progress={uploadProgress} visible />
-          </form>
+      <FileUploader
+        handleChange={handleChange}
+        onTypeError={onTypeError}
+        types={["mp4", "avi"]}
+      >
+        <div className="w-40 h-40 border-dashed border rounded-full m-auto flex items-center justify-center cursor-pointer flex-col">
+          <IoCloudUploadOutline size={44} />
+          <p className="text-xs text-center">Drag and Drop Your File Here!</p>
         </div>
-      </dialog>
+      </FileUploader>
     </>
   );
 };
-
-export default TrailerUploadModal;
