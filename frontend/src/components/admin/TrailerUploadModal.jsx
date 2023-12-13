@@ -11,20 +11,31 @@ export default function TrailerUploadModal() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [videoUploaded, setVideoUploaded] = useState(false);
   const [videoSelected, setVideoSelected] = useState(false);
+  const [trailerInfo, setTrailerInfo] = useState({});
+
   const updateNotification = useNotification();
 
-  const handleChange = async (file) => {
+  const handleChange = (file) => {
     const formData = new FormData();
     formData.append("trailer", file);
 
     setVideoSelected(true);
-
-    const res = await uploadTrailer(formData, setUploadProgress);
-    console.log(res);
-    if (!res.error) {
-      setVideoUploaded(true);
-    }
+    handleUploadTrailer(formData);
   };
+
+  const handleUploadTrailer = async (data) => {
+    const { error, secure_url, public_id } = await uploadTrailer(
+      data,
+      setUploadProgress
+    );
+
+    if (error) return updateNotification("error", error);
+    updateNotification("success", "Trailer uploaded successfully");
+    setVideoUploaded(true);
+    setTrailerInfo({ secure_url, public_id });
+  };
+
+  console.log(trailerInfo)
 
   const handleTypeError = (error) => {
     console.log(error);
