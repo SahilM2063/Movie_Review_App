@@ -62,11 +62,11 @@ const Dashboard = ({ ToggleTheme }) => {
                   document.getElementById("Movie_model").showModal();
                 }}
               >
-                Add Movie
+                Add movie
               </button>
             </li>
             <li>
-              <button>Add Actor</button>
+              <button>Add actor</button>
             </li>
           </ul>
         </details>
