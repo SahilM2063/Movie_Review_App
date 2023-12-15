@@ -6,6 +6,7 @@ import { FileUploader } from "react-drag-drop-files";
 import { uploadTrailer } from "../../api/movie";
 import { useNotification } from "../../hooks";
 import ProgressBar from "./ProgressBar";
+import MovieForm from "./MovieForm";
 
 export default function TrailerUploadModal() {
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -78,7 +79,7 @@ const TrailerSelector = ({ visible, handleChange, onTypeError }) => {
 
   return (
     <>
-      <FileUploader
+      {/* <FileUploader
         handleChange={handleChange}
         onTypeError={onTypeError}
         types={["mp4", "avi"]}
@@ -87,7 +88,8 @@ const TrailerSelector = ({ visible, handleChange, onTypeError }) => {
           <IoCloudUploadOutline size={44} />
           <p className="text-xs text-center">Drag and Drop Your File Here!</p>
         </div>
-      </FileUploader>
+      </FileUploader> */}
+      <MovieForm/>
     </>
   );
 };
