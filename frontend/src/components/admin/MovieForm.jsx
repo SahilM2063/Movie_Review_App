@@ -10,25 +10,27 @@ const MovieForm = () => {
         <div className="w-[70%]">
           <div className="form-control">
             <label className="label">
-              <span className="label-text text-sm">Title</span>
+              <span className="label-text text-[12px] leading-4">Title</span>
             </label>
             <input
               type="text"
-              name="name"
-              placeholder="name"
+              name="title"
+              placeholder="Movie title"
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
             />
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text text-sm">Email</span>
+              <span className="label-text text-[12px] leading-4">
+                Storyline
+              </span>
             </label>
-            <input
-              type="email"
-              name="email"
-              placeholder="email"
-              className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
-            />
+            <textarea
+              name="storyline"
+              placeholder="Movie description"
+              rows={10}
+              className="input input-bordered outline-none rounded-sm px-2 text-xs pt-2 resize-none h-24"
+            ></textarea>
           </div>
           <div className="form-control">
             <label className="label">
