@@ -1,13 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { Link } from "react-router-dom";
 import TagInput from "./TagInput";
 
 const MovieForm = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div>
       <h1 className="text-center text-xl font-semibold">Add movie</h1>
-      <form className="card-body p-0 flex gap-4 flex-row">
+      <form
+        onSubmit={handleSubmit}
+        className="card-body p-0 flex gap-4 flex-row"
+      >
         <div className="w-[70%]">
           <div className="form-control">
             <label className="label">
