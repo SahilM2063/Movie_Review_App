@@ -44,7 +44,7 @@ const TagInput = () => {
         <label className="label">
           <span className="label-text text-[12px] leading-4">Tags</span>
         </label>
-        <div className="flex flex-wrap items-center gap-1 input input-bordered outline-none rounded-sm px-2 pt-1 text-sm overflow-auto">
+        <div className="flex flex-wrap items-center gap-1 input input-bordered outline-none rounded-sm p-2 text-sm overflow-scroll overflow-x-hidden custom-scrollbar">
           {tags.reverse().map((t) => (
             <Tag key={t} tagName={t} onClickFunc={() => removeTag(t)} />
           ))}
@@ -67,9 +67,13 @@ export default TagInput;
 
 const Tag = ({ tagName, onClickFunc }) => {
   return (
-    <span className="kbd gap-[2px] px-[6px] rounded-md">
-      <p className="h-full leading-4">{tagName}</p>
-      <CgClose className="cursor-pointer p-0" onClick={onClickFunc} size={14} />
+    <span className="kbd gap-[2px] px-[6px] rounded-md max-w-[60%] justify-start">
+      <p className="h-full leading-4 flex-1 overflow-hidden">{tagName}</p>
+      <CgClose
+        className="cursor-pointer min-w-[10%]"
+        onClick={onClickFunc}
+        size={14}
+      />
     </span>
   );
 };

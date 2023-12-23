@@ -3,6 +3,22 @@
     appearance: none
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+    width: 2px;
+    background-color: transparent;
+}  
+
+/* Handle */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #555366;
+    border-radius: 30px;
+}
+
+/* Handle on hover */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
