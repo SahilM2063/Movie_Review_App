@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { IoCloseOutline } from "react-icons/io5";
+import { CgClose } from "react-icons/cg";
 
 const TagInput = () => {
   const [tag, setTag] = useState("");
@@ -26,19 +26,23 @@ const TagInput = () => {
       setTags([...tags, tag]);
       setTag("");
     }
+
+    if (e.key === "Backspace" && !tag && tags.length) {
+      const newTags = tags.filter((_, i) => i !== tags.length - 1);
+      setTags([...newTags]);
+    }
   };
 
   return (
     <div>
       <div className="form-control">
         <label className="label">
-          <span className="label-text text-[12px] leading-4">Title</span>
+          <span className="label-text text-[12px] leading-4">Tags</span>
         </label>
-        <div className="flex flex-wrap items-center gap-1 input input-bordered outline-none rounded-sm p-2 text-sm overflow-auto">
-          {tags.map((t) => (
-            <Tag key={t} tagName={t}/>
+        <div className="flex flex-wrap items-center gap-1 input input-bordered outline-none rounded-sm px-2 pt-1 text-sm overflow-auto">
+          {tags.reverse().map((t) => (
+            <Tag key={t} tagName={t} onClickFunc={onclick} />
           ))}
-          <Tag tagName={"hello"} onClickFunc={onclick} />
           <input
             type="text"
             name="tagField"
@@ -59,12 +63,8 @@ export default TagInput;
 const Tag = ({ tagName, onClickFunc }) => {
   return (
     <span className="kbd gap-[2px] px-[6px] rounded-md">
-      <p>{tagName}</p>
-      <IoCloseOutline
-        size={16}
-        className="cursor-pointer"
-        onClick={onClickFunc}
-      />
+      <p className="h-full leading-4">{tagName}</p>
+      <CgClose className="cursor-pointer p-0" onClick={onClickFunc} size={14} />
     </span>
   );
 };
