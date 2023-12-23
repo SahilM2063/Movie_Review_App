@@ -33,6 +33,11 @@ const TagInput = () => {
     }
   };
 
+  const removeTag = (tagToRemove) => {
+    const newTags = tags.filter((tag) => tag !== tagToRemove);
+    setTags([...newTags]);
+  };
+
   return (
     <div>
       <div className="form-control">
@@ -41,7 +46,7 @@ const TagInput = () => {
         </label>
         <div className="flex flex-wrap items-center gap-1 input input-bordered outline-none rounded-sm px-2 pt-1 text-sm overflow-auto">
           {tags.reverse().map((t) => (
-            <Tag key={t} tagName={t} onClickFunc={onclick} />
+            <Tag key={t} tagName={t} onClickFunc={() => removeTag(t)} />
           ))}
           <input
             type="text"
