@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CgClose } from "react-icons/cg";
 
 const TagInput = () => {
   const [tag, setTag] = useState("");
   const [tags, setTags] = useState([]);
+
+  const tagInput = useRef();
 
   const handleChange = ({ target }) => {
     const { value } = target;
@@ -38,6 +40,10 @@ const TagInput = () => {
     setTags([...newTags]);
   };
 
+  useEffect(() => {
+    tagInput.current.scrollIntoView();
+  }, [tag]);
+
   return (
     <div>
       <div className="form-control">
@@ -52,10 +58,11 @@ const TagInput = () => {
             type="text"
             name="tagField"
             placeholder="Tag 1, Tag 2"
-            className="input p-0 px-1 focus:outline-none flex-grow outline-none rounded-sm h-9 text-xs"
+            className="input px-1 focus:outline-none flex-grow outline-none rounded-sm h-9 text-xs"
             value={tag}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
+            ref={tagInput}
           />
         </div>
       </div>
@@ -68,7 +75,7 @@ export default TagInput;
 const Tag = ({ tagName, onClickFunc }) => {
   return (
     <span className="kbd gap-[2px] px-[6px] rounded-md max-w-[60%] justify-start">
-      <p className="h-full leading-4 flex-1 overflow-hidden">{tagName}</p>
+      <p className="h-full flex-1 overflow-hidden">{tagName}</p>
       <CgClose
         className="cursor-pointer min-w-[10%]"
         onClick={onClickFunc}
