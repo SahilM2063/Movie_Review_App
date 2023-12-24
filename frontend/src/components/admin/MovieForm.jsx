@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import TagInput from "./TagInput";
+import LiveSearch from "./LiveSearch";
 
 const MovieForm = () => {
   const handleSubmit = (e) => {
@@ -40,6 +41,7 @@ const MovieForm = () => {
             ></textarea>
           </div>
           <TagInput />
+          <LiveSearch />
           <div className="form-control mt-4">
             <button className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs">
               Create
