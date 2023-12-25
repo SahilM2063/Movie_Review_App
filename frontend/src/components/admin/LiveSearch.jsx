@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export const profileData = [
   {
@@ -80,14 +80,25 @@ const LiveSearch = () => {
 export default LiveSearch;
 
 const SearchResultsDropdown = ({ visible, profileData = [], focusedIndex }) => {
+  const searchResultContainer = useRef();
+
+  useEffect(() => {
+    if (searchResultContainer.current) {
+      searchResultContainer.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [focusedIndex]);
+
   if (!visible) return null;
-  // console.log(focusedIndex);
 
   return (
     <div className="w-full max-h-20 mt-1 bg-base-200 top-20 custom-scrollbar overflow-scroll rounded-sm overflow-x-hidden">
       {profileData.map(({ id, name, avatar }, index) => {
         return (
           <div
+            ref={index === focusedIndex ? searchResultContainer : null}
             key={id}
             className={
               index === focusedIndex
