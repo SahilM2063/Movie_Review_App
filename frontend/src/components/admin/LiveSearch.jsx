@@ -38,17 +38,17 @@ const LiveSearch = () => {
   };
 
   const handleKeyDown = ({ key }) => {
-    console.log(key);
+    // console.log(key);
     let nextCount;
     const keys = ["ArrowUp", "ArrowDown", "Enter", "Escape"];
     if (!keys.includes(key)) return;
 
     // move selection up or down
     if (key === "ArrowDown") {
-      nextCount = focusedIndex + 1;
+      nextCount = (focusedIndex + 1) % profileData.length;
     }
     if (key === "ArrowUp") {
-      nextCount = focusedIndex - 1;
+      nextCount = (focusedIndex + profileData.length - 1) % profileData.length;
     }
 
     SetFocusedIndex(nextCount);
@@ -81,7 +81,7 @@ export default LiveSearch;
 
 const SearchResultsDropdown = ({ visible, profileData = [], focusedIndex }) => {
   if (!visible) return null;
-  console.log(focusedIndex);
+  // console.log(focusedIndex);
 
   return (
     <div className="w-full max-h-20 mt-1 bg-base-200 top-20 custom-scrollbar overflow-scroll rounded-sm overflow-x-hidden">
