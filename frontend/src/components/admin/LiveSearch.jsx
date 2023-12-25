@@ -35,6 +35,7 @@ const LiveSearch = () => {
 
   const handleOnBlur = () => {
     SetDisplaySearch(false);
+    SetFocusedIndex(-1);
   };
 
   const handleKeyDown = ({ key }) => {
@@ -83,12 +84,10 @@ const SearchResultsDropdown = ({ visible, profileData = [], focusedIndex }) => {
   const searchResultContainer = useRef();
 
   useEffect(() => {
-    if (searchResultContainer.current) {
-      searchResultContainer.current.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
-    }
+    searchResultContainer.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
   }, [focusedIndex]);
 
   if (!visible) return null;
