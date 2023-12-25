@@ -36,7 +36,7 @@ export default function TrailerUploadModal() {
     setTrailerInfo({ secure_url, public_id });
   };
 
-  console.log(trailerInfo)
+  // console.log(trailerInfo)
 
   const handleTypeError = (error) => {
     console.log(error);

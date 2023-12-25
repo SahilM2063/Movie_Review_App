@@ -38,8 +38,13 @@ const LiveSearch = () => {
     SetFocusedIndex(-1);
   };
 
-  const handleKeyDown = ({ key }) => {
+  const handleSelection = (SelectedItem) => {
+    console.log(SelectedItem);
+  };
+
+  const handleKeyDown = (e) => {
     // console.log(key);
+    const { key } = e;
     let nextCount;
     const keys = ["ArrowUp", "ArrowDown", "Enter", "Escape"];
     if (!keys.includes(key)) return;
@@ -50,6 +55,11 @@ const LiveSearch = () => {
     }
     if (key === "ArrowUp") {
       nextCount = (focusedIndex + profileData.length - 1) % profileData.length;
+    }
+
+    if (key === "Enter") {
+      e.preventDefault();
+      handleSelection(profileData[focusedIndex]);
     }
 
     SetFocusedIndex(nextCount);
@@ -73,6 +83,7 @@ const LiveSearch = () => {
         focusedIndex={focusedIndex}
         visible={displaySearch}
         profileData={profileData}
+        onSelect={handleSelection}
       />
     </div>
   );
@@ -80,7 +91,12 @@ const LiveSearch = () => {
 
 export default LiveSearch;
 
-const SearchResultsDropdown = ({ visible, profileData = [], focusedIndex }) => {
+const SearchResultsDropdown = ({
+  visible,
+  profileData = [],
+  focusedIndex,
+  onSelect,
+}) => {
   const searchResultContainer = useRef();
 
   useEffect(() => {
@@ -94,9 +110,11 @@ const SearchResultsDropdown = ({ visible, profileData = [], focusedIndex }) => {
 
   return (
     <div className="w-full max-h-20 mt-1 bg-base-200 top-20 custom-scrollbar overflow-scroll rounded-sm overflow-x-hidden">
-      {profileData.map(({ id, name, avatar }, index) => {
+      {profileData.map((profileData, index) => {
+        const { id, name, avatar } = profileData;
         return (
           <div
+            onClick={() => onSelect(profileData)}
             ref={index === focusedIndex ? searchResultContainer : null}
             key={id}
             className={
