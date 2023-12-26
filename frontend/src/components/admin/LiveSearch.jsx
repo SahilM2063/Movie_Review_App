@@ -33,9 +33,15 @@ const LiveSearch = () => {
     if (profileData.length > 0) SetDisplaySearch(true);
   };
 
-  const handleOnBlur = () => {
+  const closeSearchDropdown = () => {
     SetDisplaySearch(false);
     SetFocusedIndex(-1);
+  };
+
+  const handleOnBlur = () => {
+    setTimeout(() => {
+      closeSearchDropdown();
+    }, 300);
   };
 
   const handleSelection = (SelectedItem) => {
