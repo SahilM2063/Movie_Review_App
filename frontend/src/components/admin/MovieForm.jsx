@@ -23,11 +23,16 @@ const MovieForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(movieInfo);
   };
 
   const handleChange = ({ target }) => {
     const { value, name } = target;
-    setMovieInfo({...movieInfo, [name]: value });
+    setMovieInfo({ ...movieInfo, [name]: value });
+  };
+
+  const updateTags = (tags) => {
+    setMovieInfo({ ...movieInfo, tags });
   };
 
   const { title, storyLine, director } = movieInfo;
@@ -67,10 +72,13 @@ const MovieForm = () => {
               className="input input-bordered outline-none rounded-sm px-2 text-xs pt-2 resize-none h-24"
             ></textarea>
           </div>
-          <TagInput name="tags" />
+          <TagInput name="tags" onChange={updateTags} />
           <LiveSearch />
           <div className="form-control mt-4">
-            <button className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs">
+            <button
+              className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs"
+              type="submit"
+            >
               Create
             </button>
           </div>

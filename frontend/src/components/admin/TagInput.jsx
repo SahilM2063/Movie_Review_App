@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { CgClose } from "react-icons/cg";
 
-const TagInput = () => {
+const TagInput = ({ onChange }) => {
   const [tag, setTag] = useState("");
   const [tags, setTags] = useState([]);
 
@@ -12,6 +12,8 @@ const TagInput = () => {
   const handleChange = ({ target }) => {
     const { value } = target;
     if (value !== ",") setTag(value);
+
+    onChange(tags);
   };
 
   const handleKeyDown = (e) => {
