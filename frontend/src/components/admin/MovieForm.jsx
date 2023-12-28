@@ -23,7 +23,7 @@ const MovieForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(movieInfo);
+    // console.log(movieInfo);
   };
 
   const handleChange = ({ target }) => {
