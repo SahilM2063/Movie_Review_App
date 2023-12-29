@@ -3,6 +3,29 @@ import React, { useState } from "react";
 import TagInput from "./TagInput";
 import LiveSearch from "./LiveSearch";
 
+export const profileData = [
+  {
+    id: 1,
+    name: "Alice Smith",
+    avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+  },
+  {
+    id: 2,
+    name: "Bob Johnson",
+    avatar: "https://randomuser.me/api/portraits/men/12.jpg",
+  },
+  {
+    id: 3,
+    name: "Charlie Brown",
+    avatar: "https://randomuser.me/api/portraits/men/61.jpg",
+  },
+  {
+    id: 4,
+    name: "Diana Miller",
+    avatar: "https://randomuser.me/api/portraits/women/9.jpg",
+  },
+];
+
 const defaultMovieInfo = {
   title: "",
   storyLine: "",
@@ -73,7 +96,23 @@ const MovieForm = () => {
             ></textarea>
           </div>
           <TagInput name="tags" onChange={updateTags} />
-          <LiveSearch />
+          <LiveSearch
+            onSelect={(data) => console.log(data)}
+            placeholder="Search profiles"
+            profileData={profileData}
+            renderItems={(data) => {
+              return (
+                <>
+                  <img
+                    src={data.avatar}
+                    alt={data.name}
+                    className="rounded-full w-8 h-8 mr-3"
+                  />
+                  <span className="font-semibold">{data.name}</span>
+                </>
+              );
+            }}
+          />
           <div className="form-control mt-4">
             <button
               className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs"
