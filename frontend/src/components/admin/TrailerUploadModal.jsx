@@ -54,7 +54,7 @@ export default function TrailerUploadModal() {
   return (
     <dialog id="Movie_model" className="modal">
       <div className="modal-box rounded-sm">
-        <div method="dialog">
+        <form method="dialog">
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
             ✕
           </button>
@@ -68,7 +68,7 @@ export default function TrailerUploadModal() {
             message={getUploadProgressValue()}
             visible={!videoUploaded && videoSelected}
           />
-        </div>
+        </form>
       </div>
     </dialog>
   );
@@ -80,7 +80,7 @@ const TrailerSelector = ({ visible, handleChange, onTypeError }) => {
   return (
     <>
       {/* <FileUploader
-        handleChange={handleChange}
+        handleChange={handleChange}\
         onTypeError={onTypeError}
         types={["mp4", "avi"]}
       >
@@ -89,7 +89,7 @@ const TrailerSelector = ({ visible, handleChange, onTypeError }) => {
           <p className="text-xs text-center">Drag and Drop Your File Here!</p>
         </div>
       </FileUploader> */}
-      <MovieForm/>
+      <MovieForm />
     </>
   );
 };

@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { forwardRef, useEffect, useRef, useState } from "react";
@@ -11,6 +12,7 @@ const LiveSearch = ({
   resultContainerStyle,
   renderItems = null,
   onSelect = null,
+  name,
 }) => {
   const [displaySearch, SetDisplaySearch] = useState(false);
   const [focusedIndex, SetFocusedIndex] = useState(-1);
@@ -59,12 +61,9 @@ const LiveSearch = ({
 
   return (
     <div className="form-control relative">
-      <label className="label">
-        <span className="label-text text-[12px] leading-4">Live Search</span>
-      </label>
       <input
         type="text"
-        name="profiles"
+        name={name}
         placeholder={placeholder ? placeholder : null}
         className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
         onFocus={handleOnFocus}

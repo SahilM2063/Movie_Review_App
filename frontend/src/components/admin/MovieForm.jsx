@@ -58,6 +58,10 @@ const MovieForm = () => {
     setMovieInfo({ ...movieInfo, tags });
   };
 
+  const updateDirectors = (profile) => {
+    setMovieInfo({...movieInfo, director: profile });
+  }
+
   const { title, storyLine, director } = movieInfo;
   return (
     <div>
@@ -96,23 +100,32 @@ const MovieForm = () => {
             ></textarea>
           </div>
           <TagInput name="tags" onChange={updateTags} />
-          <LiveSearch
-            onSelect={(data) => console.log(data)}
-            placeholder="Search profiles"
-            profileData={profileData}
-            renderItems={(data) => {
-              return (
-                <>
-                  <img
-                    src={data.avatar}
-                    alt={data.name}
-                    className="rounded-full w-8 h-8 mr-3"
-                  />
-                  <span className="font-semibold">{data.name}</span>
-                </>
-              );
-            }}
-          />
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text text-[12px] leading-4">
+                Directors
+              </span>
+            </label>
+            <LiveSearch
+              name={"directors"}
+              value={director.name}
+              onSelect={updateDirectors}
+              placeholder="Search profiles"
+              profileData={profileData}
+              renderItems={(data) => {
+                return (
+                  <>
+                    <img
+                      src={data.avatar}
+                      alt={data.name}
+                      className="rounded-full w-8 h-8 mr-3"
+                    />
+                    <span className="font-semibold">{data.name}</span>
+                  </>
+                );
+              }}
+            />
+          </div>
           <div className="form-control mt-4">
             <button
               className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs"
