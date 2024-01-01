@@ -79,6 +79,7 @@ const TrailerSelector = ({ visible, handleChange, onTypeError }) => {
 
   return (
     <>
+    // simple minor changes 
       {/* <FileUploader
         handleChange={handleChange}\
         onTypeError={onTypeError}

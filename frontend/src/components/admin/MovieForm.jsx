@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import TagInput from "./TagInput";
 import LiveSearch from "./LiveSearch";
+import { useNotification } from "../../hooks";
 
 export const profileData = [
   {
@@ -43,6 +44,7 @@ const defaultMovieInfo = {
 
 const MovieForm = () => {
   const [movieInfo, setMovieInfo] = useState({ ...defaultMovieInfo });
+  const updateNotification = useNotification();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,8 +61,22 @@ const MovieForm = () => {
   };
 
   const updateDirectors = (profile) => {
-    setMovieInfo({...movieInfo, director: profile });
-  }
+    setMovieInfo({ ...movieInfo, director: profile });
+  };
+
+  const updateWriters = (profile) => {
+    const { writers } = movieInfo;
+    for (let writer of writers) {
+      if (writer.id === profile.id) {
+        return updateNotification(
+          "warning",
+          "This profile already selected a writer"
+        );
+      }
+    }
+
+    setMovieInfo({ ...movieInfo, writers: [...writers, profile] });
+  };
 
   const { title, storyLine, director } = movieInfo;
   return (
@@ -110,6 +126,30 @@ const MovieForm = () => {
               name={"directors"}
               value={director.name}
               onSelect={updateDirectors}
+              placeholder="Search profiles"
+              profileData={profileData}
+              renderItems={(data) => {
+                return (
+                  <>
+                    <img
+                      src={data.avatar}
+                      alt={data.name}
+                      className="rounded-full w-8 h-8 mr-3"
+                    />
+                    <span className="font-semibold">{data.name}</span>
+                  </>
+                );
+              }}
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text text-[12px] leading-4">Writers</span>
+            </label>
+            <LiveSearch
+              name={"Writers"}
+              value={director.name}
+              onSelect={updateWriters}
               placeholder="Search profiles"
               profileData={profileData}
               renderItems={(data) => {

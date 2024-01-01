@@ -101,7 +101,7 @@ const NotificationProvider = ({ children }) => {
       {children}
       {notification && (
         <div
-          className={`alert max-w-lg md:max-w-[50%] md:flex md:p-2 sm:max-w-[70%] sm:flex sm:p-3 xs:max-w-[80%] xs:flex xs:p-2 m-auto rounded-xl ${classes}`}
+          className={`alert max-w-lg md:max-w-[50%] md:flex md:p-2 sm:max-w-[70%] sm:flex sm:p-3 xs:max-w-[80%] xs:flex xs:p-2 m-auto rounded-xl z-[1000] ${classes}`}
         >
           {icon}
           <span className="text-white">{notification}</span>
