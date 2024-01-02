@@ -48,7 +48,7 @@ export default function TrailerUploadModal() {
       return "Processing...";
     }
 
-    return `Upload progress ${uploadProgress}%`;
+    return `Upload Progress ${uploadProgress}%`;
   };
 
   return (
