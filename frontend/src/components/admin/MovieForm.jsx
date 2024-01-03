@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import TagInput from "./TagInput";
 import LiveSearch from "./LiveSearch";
-import { useNotification } from "../../hooks";
 
 export const profileData = [
   {
@@ -44,11 +43,10 @@ const defaultMovieInfo = {
 
 const MovieForm = () => {
   const [movieInfo, setMovieInfo] = useState({ ...defaultMovieInfo });
-  const updateNotification = useNotification();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(movieInfo);
+    console.log(movieInfo)
   };
 
   const handleChange = ({ target }) => {
@@ -68,17 +66,14 @@ const MovieForm = () => {
     const { writers } = movieInfo;
     for (let writer of writers) {
       if (writer.id === profile.id) {
-        return updateNotification(
-          "warning",
-          "This profile already selected a writer"
-        );
+        return;
       }
     }
 
     setMovieInfo({ ...movieInfo, writers: [...writers, profile] });
   };
 
-  const { title, storyLine, director } = movieInfo;
+  const { title, storyLine, director, writers } = movieInfo;
   return (
     <div>
       <h1 className="text-center text-xl font-semibold">Add movie</h1>
@@ -125,6 +120,7 @@ const MovieForm = () => {
             <LiveSearch
               name={"directors"}
               value={director.name}
+              onChange={updateDirectors}
               onSelect={updateDirectors}
               placeholder="Search profiles"
               profileData={profileData}
@@ -148,7 +144,8 @@ const MovieForm = () => {
             </label>
             <LiveSearch
               name={"Writers"}
-              value={director.name}
+              value={writers.map((writer) => writer.name)}
+              onChange={updateWriters}
               onSelect={updateWriters}
               placeholder="Search profiles"
               profileData={profileData}
