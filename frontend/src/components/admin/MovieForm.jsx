@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import TagInput from "./TagInput";
@@ -75,7 +76,7 @@ const MovieForm = () => {
 
   const { title, storyLine, director, writers } = movieInfo;
   return (
-    <div >
+    <div>
       <h1 className="text-center text-xl font-semibold">Add movie</h1>
       <form
         onSubmit={handleSubmit}
@@ -139,9 +140,7 @@ const MovieForm = () => {
             />
           </div>
           <div className="form-control">
-            <label className="label">
-              <span className="label-text text-[12px] leading-4">Writers</span>
-            </label>
+            <LabelWithBadge label={"Writers"} badge={writers.length} />
             <LiveSearch
               name={"Writers"}
               value={writers.map((writer) => writer.name)}
@@ -179,3 +178,19 @@ const MovieForm = () => {
 };
 
 export default MovieForm;
+
+const LabelWithBadge = ({ label, badge }) => {
+  return (
+    <div className="flex justify-between">
+      <div className="indicator">
+        <span className="indicator-item badge indicator-top translate-y-[40%] w-3 h-3 p-1 bg-transparent text-[8px]">
+          {badge <= 9 ? badge : "9+"}
+        </span>
+        <label className="label">
+          <span className="label-text text-[12px] leading-4">{label}</span>
+        </label>
+      </div>
+      <button className="text-[10px]">View all</button>
+    </div>
+  );
+};
