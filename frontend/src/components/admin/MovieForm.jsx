@@ -46,7 +46,7 @@ const MovieForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(movieInfo)
+    console.log(movieInfo);
   };
 
   const handleChange = ({ target }) => {
@@ -75,7 +75,7 @@ const MovieForm = () => {
 
   const { title, storyLine, director, writers } = movieInfo;
   return (
-    <div>
+    <div >
       <h1 className="text-center text-xl font-semibold">Add movie</h1>
       <form
         onSubmit={handleSubmit}

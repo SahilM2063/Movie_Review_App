@@ -119,7 +119,7 @@ const SearchResultsDropdown = ({
         return (
           <ResultCard
             ref={index === focusedIndex ? searchResultContainer : null}
-            key={profileData.id}
+            key={index.toString()}
             item={profileData}
             renderItems={renderItems}
             resultContainerStyle={resultContainerStyle}
@@ -147,7 +147,7 @@ const ResultCard = forwardRef((props, ref) => {
     if (resultContainerStyle) {
       return resultContainerStyle + " " + selectedResultStyle;
     }
-// code added for reviewing later
+    // code added for reviewing later
 
     return (
       selectedResultStyle +

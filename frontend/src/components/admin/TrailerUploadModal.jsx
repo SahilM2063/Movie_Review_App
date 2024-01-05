@@ -53,7 +53,7 @@ export default function TrailerUploadModal() {
 
   return (
     <dialog id="Movie_model" className="modal">
-      <div className="modal-box rounded-sm">
+      <div className="modal-box rounded-sm custom-scrollbar overflow-scroll overflow-x-hidden">
         <div method="dialog">
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
             ✕
