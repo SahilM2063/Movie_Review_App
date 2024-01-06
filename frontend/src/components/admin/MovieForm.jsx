@@ -140,7 +140,11 @@ const MovieForm = () => {
             />
           </div>
           <div className="form-control">
-            <LabelWithBadge label={"Writers"} badge={writers.length} />
+            <LabelWithBadge
+              htmlFor={"my_modal"}
+              label={"Writers"}
+              badge={writers.length}
+            />
             <LiveSearch
               name={"Writers"}
               value={writers.map((writer) => writer.name)}
@@ -161,6 +165,7 @@ const MovieForm = () => {
                 );
               }}
             />
+            <ModalModule profiles={writers} />
           </div>
           <div className="form-control mt-4">
             <button
@@ -179,9 +184,9 @@ const MovieForm = () => {
 
 export default MovieForm;
 
-const LabelWithBadge = ({ label, badge }) => {
+const LabelWithBadge = ({ label, badge, htmlFor }) => {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between items-center">
       <div className="indicator">
         <span className="indicator-item badge indicator-top translate-y-[40%] w-3 h-3 p-1 bg-transparent text-[8px]">
           {badge <= 9 ? badge : "9+"}
@@ -190,7 +195,28 @@ const LabelWithBadge = ({ label, badge }) => {
           <span className="label-text text-[12px] leading-4">{label}</span>
         </label>
       </div>
-      <button className="text-[10px]">View all</button>
+      <label className="text-[10px] cursor-pointer" htmlFor={htmlFor}>
+        View all
+      </label>
     </div>
+  );
+};
+
+const ModalModule = ({ profiles }) => {
+  if (profiles.length <= 0) return null;
+
+  return (
+    <>
+      <input type="checkbox" id="my_modal" className="modal-toggle" />
+      <div className="modal" role="dialog">
+        <div className="modal-box">
+          <h3 className="text-lg font-bold">Hello!</h3>
+          <p className="py-4">This modal works with a hidden checkbox!</p>
+        </div>
+        <label className="modal-backdrop" htmlFor="my_modal">
+          Close
+        </label>
+      </div>
+    </>
   );
 };
