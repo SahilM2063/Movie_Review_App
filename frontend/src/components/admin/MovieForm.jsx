@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import TagInput from "./TagInput";
 import LiveSearch from "./LiveSearch";
+import { IoClose } from "react-icons/io5";
 
 export const profileData = [
   {
@@ -72,6 +73,13 @@ const MovieForm = () => {
     }
 
     setMovieInfo({ ...movieInfo, writers: [...writers, profile] });
+  };
+
+  const handleWriterRemove = (profileId) => {
+    const { writers } = movieInfo;
+    const newWriters = writers.filter(({ id }) => id !== profileId);
+
+    setMovieInfo({ ...movieInfo, writers: [...newWriters] });
   };
 
   const { title, storyLine, director, writers } = movieInfo;
@@ -165,7 +173,10 @@ const MovieForm = () => {
                 );
               }}
             />
-            <ModalModule profiles={writers} />
+            <ModalModule
+              profiles={writers}
+              OnRemoveClick={handleWriterRemove}
+            />
           </div>
           <div className="form-control mt-4">
             <button
@@ -202,16 +213,31 @@ const LabelWithBadge = ({ label, badge, htmlFor }) => {
   );
 };
 
-const ModalModule = ({ profiles }) => {
+const ModalModule = ({ profiles, OnRemoveClick }) => {
   if (profiles.length <= 0) return null;
 
   return (
     <>
       <input type="checkbox" id="my_modal" className="modal-toggle" />
       <div className="modal" role="dialog">
-        <div className="modal-box">
-          <h3 className="text-lg font-bold">Hello!</h3>
-          <p className="py-4">This modal works with a hidden checkbox!</p>
+        <div className="modal-box grid grid-cols-2 gap-4 p-4 rounded-md max-w-md custom-scrollbar">
+          {profiles.map(({ id, name, avatar }) => {
+            return (
+              <div key={id} className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <img
+                    src={avatar}
+                    alt={name}
+                    className="rounded-full w-10 h-10 mr-3"
+                  />
+                  <span className="font-semibold">{name}</span>
+                </div>
+                <button onClick={() => OnRemoveClick(id)}>
+                  <IoClose size={18} />
+                </button>
+              </div>
+            );
+          })}
         </div>
         <label className="modal-backdrop" htmlFor="my_modal">
           Close
