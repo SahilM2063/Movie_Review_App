@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import TagInput from "./TagInput";
 import LiveSearch from "./LiveSearch";
 import { IoClose } from "react-icons/io5";
+import CastForm from "./CastForm";
 
 export const profileData = [
   {
@@ -178,6 +179,9 @@ const MovieForm = () => {
               OnRemoveClick={handleWriterRemove}
             />
           </div>
+          <div className="form-control">
+            <CastForm />
+          </div>
           <div className="form-control mt-4">
             <button
               className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs"
@@ -220,7 +224,7 @@ const ModalModule = ({ profiles, OnRemoveClick }) => {
     <>
       <input type="checkbox" id="my_modal" className="modal-toggle" />
       <div className="modal" role="dialog">
-        <div className="modal-box grid grid-cols-2 gap-4 p-4 rounded-md max-w-md custom-scrollbar">
+        <div className="modal-box grid sm:grid-cols-1 xs:grid-cols-1 md:grid-cols-1 grid-cols-2 gap-4 p-4 rounded-md max-w-md custom-scrollbar">
           {profiles.map(({ id, name, avatar }) => {
             return (
               <div key={id} className="flex items-center justify-between">
