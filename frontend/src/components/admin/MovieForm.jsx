@@ -29,6 +29,19 @@ export const profileData = [
   },
 ];
 
+export const renderItems = (data) => {
+  return (
+    <>
+      <img
+        src={data.avatar}
+        alt={data.name}
+        className="rounded-full w-8 h-8 mr-3"
+      />
+      <span className="font-semibold">{data.name}</span>
+    </>
+  );
+};
+
 const defaultMovieInfo = {
   title: "",
   storyLine: "",
@@ -181,9 +194,7 @@ const MovieForm = () => {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text text-[12px] leading-4">
-                Cast
-              </span>
+              <span className="label-text text-[12px] leading-4">Cast</span>
             </label>
             <CastForm />
           </div>
