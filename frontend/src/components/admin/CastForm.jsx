@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import LiveSearch from "./LiveSearch";
-import { profileData, renderItems } from "./MovieForm";
+import { LabelWithBadge, profileData, renderItems } from "./MovieForm";
 
 const defaultCastInfo = {
   profile: {},
@@ -11,8 +11,6 @@ const defaultCastInfo = {
 
 const CastForm = () => {
   const [castInfo, setCastInfo] = useState({ ...defaultCastInfo });
-
-  const { leadActor, profile, roleAs } = castInfo;
 
   const handleOnChange = ({ target }) => {
     const { checked, name, value } = target;
@@ -31,18 +29,25 @@ const CastForm = () => {
     console.log(castInfo);
   };
 
+  const { leadActor, profile, roleAs } = castInfo;
   return (
     <div className="form-control">
-      <label className="label p-0 px-1 cursor-pointer">
-        <span className="label-text leading-3 text-[10px]">LeadActor</span>
+      <div className="flex justify-between items-center">
+        <LabelWithBadge
+          label={"LeadActor"}
+          badge={2}
+          viewBtn={false}
+          labelClasses={"p-0 pl-1 "}
+        />
         <input
           type="checkbox"
+          value={leadActor}
           name="leadActor"
           checked={leadActor}
           onChange={handleOnChange}
           className="checkbox w-4 h-4 justify-start"
         />
-      </label>
+      </div>
       <div className="flex mt-2 justify-between gap-2 items-center w-full">
         <LiveSearch
           placeholder="Search profile..."
@@ -50,6 +55,7 @@ const CastForm = () => {
           profileData={profileData}
           onSelect={handleProfileSelect}
           renderItems={renderItems}
+          onChange={handleOnChange}
         />
         <span className="text-sm">As</span>
         <input

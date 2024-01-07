@@ -166,6 +166,7 @@ const MovieForm = () => {
               htmlFor={"my_modal"}
               label={"Writers"}
               badge={writers.length}
+              viewBtn={true}
             />
             <LiveSearch
               name={"Writers"}
@@ -193,7 +194,7 @@ const MovieForm = () => {
             />
           </div>
           <div className="form-control">
-            <label className="label">
+            <label className="label pb-0">
               <span className="label-text text-[12px] leading-4">Cast</span>
             </label>
             <CastForm />
@@ -215,20 +216,28 @@ const MovieForm = () => {
 
 export default MovieForm;
 
-const LabelWithBadge = ({ label, badge, htmlFor }) => {
+export const LabelWithBadge = ({
+  label,
+  badge,
+  htmlFor,
+  viewBtn,
+  labelClasses = "",
+}) => {
   return (
     <div className="flex justify-between items-center">
       <div className="indicator">
-        <span className="indicator-item badge indicator-top translate-y-[40%] w-3 h-3 p-1 bg-transparent text-[8px]">
+        <span className="indicator-item badge indicator-top translate-y-[30%] w-3 h-3 p-1 bg-transparent text-[8px]">
           {badge <= 9 ? badge : "9+"}
         </span>
-        <label className="label">
+        <label className={"label" + labelClasses}>
           <span className="label-text text-[12px] leading-4">{label}</span>
         </label>
       </div>
-      <label className="text-[10px] cursor-pointer" htmlFor={htmlFor}>
-        View all
-      </label>
+      {viewBtn && (
+        <label className="text-[10px] cursor-pointer" htmlFor={htmlFor}>
+          View all
+        </label>
+      )}
     </div>
   );
 };
