@@ -180,6 +180,11 @@ const MovieForm = () => {
             />
           </div>
           <div className="form-control">
+            <label className="label">
+              <span className="label-text text-[12px] leading-4">
+                Cast
+              </span>
+            </label>
             <CastForm />
           </div>
           <div className="form-control mt-4">
