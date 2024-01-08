@@ -11,7 +11,7 @@ const defaultCastInfo = {
   leadActor: false,
 };
 
-const CastForm = ({ onCastSubmit }) => {
+const CastForm = ({ onCastSubmit, cast }) => {
   const [castInfo, setCastInfo] = useState({ ...defaultCastInfo });
 
   const updateNotification = useNotification();
@@ -37,23 +37,23 @@ const CastForm = ({ onCastSubmit }) => {
   const { leadActor, profile, roleAs } = castInfo;
   return (
     <div className="form-control">
-      <div className="flex justify-between items-center">
-        <LabelWithBadge
-          label={"LeadActor"}
-          badge={0}
-          viewBtn={false}
-          labelClasses={"p-0 pl-1 "}
-        />
-        <input
-          type="checkbox"
-          value={leadActor}
-          name="leadActor"
-          checked={leadActor}
-          onChange={handleOnChange}
-          className="checkbox w-4 h-4 justify-start"
-        />
-      </div>
-      <div className="flex mt-2 justify-between gap-2 items-center w-full">
+      <LabelWithBadge
+        htmlFor={"my_modal"}
+        label={"Cast & Crew"}
+        badge={cast.length}
+        viewBtn={true}
+      />
+      <div className="flex justify-between gap-2 items-center w-full">
+        <div className="tooltip text-sm" data-tip="LeadActor">
+          <input
+            type="checkbox"
+            value={leadActor}
+            name="leadActor"
+            checked={leadActor}
+            onChange={handleOnChange}
+            className="checkbox w-4 h-4 rounded-sm justify-start"
+          />
+        </div>
         <LiveSearch
           placeholder="Search profile..."
           value={profile.name}

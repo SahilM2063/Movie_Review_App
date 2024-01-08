@@ -106,7 +106,14 @@ const MovieForm = () => {
     setMovieInfo({ ...movieInfo, writers: [...newWriters] });
   };
 
-  const { title, storyLine, director, writers } = movieInfo;
+  const handleCastRemove = (profileId) => {
+    const { cast } = movieInfo;
+    const newCast = cast.filter(({ id }) => id !== profileId);
+
+    setMovieInfo({ ...movieInfo, cast: [...newCast] });
+  };
+
+  const { title, storyLine, director, writers, cast } = movieInfo;
   return (
     <div>
       <h1 className="text-center text-xl font-semibold">Add movie</h1>
@@ -204,10 +211,11 @@ const MovieForm = () => {
             />
           </div>
           <div className="form-control">
-            <label className="label pb-0">
-              <span className="label-text text-[12px] leading-4">Cast</span>
-            </label>
-            <CastForm onCastSubmit={updateCast} />
+            <CastForm onCastSubmit={updateCast} cast={cast} />
+            <ModalModule
+              profiles={}
+              OnRemoveClick={handleCastRemove}
+            />
           </div>
           <div className="form-control mt-4">
             <button
@@ -236,9 +244,13 @@ export const LabelWithBadge = ({
   return (
     <div className="flex justify-between items-center">
       <div className="indicator">
-        <span className="indicator-item badge indicator-top translate-y-[30%] w-3 h-3 p-1 bg-transparent text-[8px]">
-          {badge <= 9 ? badge : "9+"}
-        </span>
+        {badge > 0 ? (
+          <span className="indicator-item badge indicator-top translate-y-[30%] w-3 h-3 p-1 bg-transparent text-[8px]">
+            {badge <= 9 ? badge : "9+"}
+          </span>
+        ) : (
+          ""
+        )}
         <label className={"label" + labelClasses}>
           <span className="label-text text-[12px] leading-4">{label}</span>
         </label>
