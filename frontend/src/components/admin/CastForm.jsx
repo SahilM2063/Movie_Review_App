@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import LiveSearch from "./LiveSearch";
 import { LabelWithBadge, profileData, renderItems } from "./MovieForm";
+import { useNotification } from "../../hooks";
 
 const defaultCastInfo = {
   profile: {},
@@ -9,8 +11,10 @@ const defaultCastInfo = {
   leadActor: false,
 };
 
-const CastForm = () => {
+const CastForm = ({ onCastSubmit }) => {
   const [castInfo, setCastInfo] = useState({ ...defaultCastInfo });
+
+  const updateNotification = useNotification();
 
   const handleOnChange = ({ target }) => {
     const { checked, name, value } = target;
@@ -26,7 +30,8 @@ const CastForm = () => {
   };
 
   const submitCast = () => {
-    console.log(castInfo);
+    onCastSubmit(castInfo);
+    setCastInfo({ ...defaultCastInfo });
   };
 
   const { leadActor, profile, roleAs } = castInfo;
@@ -35,7 +40,7 @@ const CastForm = () => {
       <div className="flex justify-between items-center">
         <LabelWithBadge
           label={"LeadActor"}
-          badge={2}
+          badge={0}
           viewBtn={false}
           labelClasses={"p-0 pl-1 "}
         />

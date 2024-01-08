@@ -89,6 +89,16 @@ const MovieForm = () => {
     setMovieInfo({ ...movieInfo, writers: [...writers, profile] });
   };
 
+  const updateCast = (castInfo) => {
+    const { cast } = movieInfo;
+    for (let c of cast) {
+      if (c.profile.id === castInfo.profile.id) {
+        return;
+      }
+    }
+    setMovieInfo({ ...movieInfo, cast: [...cast, castInfo] });
+  };
+
   const handleWriterRemove = (profileId) => {
     const { writers } = movieInfo;
     const newWriters = writers.filter(({ id }) => id !== profileId);
@@ -197,7 +207,7 @@ const MovieForm = () => {
             <label className="label pb-0">
               <span className="label-text text-[12px] leading-4">Cast</span>
             </label>
-            <CastForm />
+            <CastForm onCastSubmit={updateCast} />
           </div>
           <div className="form-control mt-4">
             <button
@@ -218,7 +228,7 @@ export default MovieForm;
 
 export const LabelWithBadge = ({
   label,
-  badge,
+  badge = 0,
   htmlFor,
   viewBtn,
   labelClasses = "",
