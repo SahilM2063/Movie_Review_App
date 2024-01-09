@@ -41,7 +41,7 @@ const CastForm = ({ onCastSubmit, cast }) => {
         htmlFor={"my_modal"}
         label={"Cast & Crew"}
         badge={cast.length}
-        viewBtn={true}
+        viewBtn={cast.length > 0 ? true : false}
       />
       <div className="flex justify-between gap-2 items-center w-full">
         <div className="tooltip text-sm" data-tip="LeadActor">

@@ -5,6 +5,7 @@ import TagInput from "./TagInput";
 import LiveSearch from "./LiveSearch";
 import { IoClose } from "react-icons/io5";
 import CastForm from "./CastForm";
+import { FaCheck } from "react-icons/fa6";
 
 export const profileData = [
   {
@@ -108,7 +109,7 @@ const MovieForm = () => {
 
   const handleCastRemove = (profileId) => {
     const { cast } = movieInfo;
-    const newCast = cast.filter(({ id }) => id !== profileId);
+    const newCast = cast.filter(({ profile }) => profile.id !== profileId);
 
     setMovieInfo({ ...movieInfo, cast: [...newCast] });
   };
@@ -183,7 +184,7 @@ const MovieForm = () => {
               htmlFor={"my_modal"}
               label={"Writers"}
               badge={writers.length}
-              viewBtn={true}
+              viewBtn={writers.length > 0 ? true : false}
             />
             <LiveSearch
               name={"Writers"}
@@ -205,17 +206,14 @@ const MovieForm = () => {
                 );
               }}
             />
-            <ModalModule
+            <WritersModalModule
               profiles={writers}
               OnRemoveClick={handleWriterRemove}
             />
           </div>
           <div className="form-control">
             <CastForm onCastSubmit={updateCast} cast={cast} />
-            <ModalModule
-              profiles={}
-              OnRemoveClick={handleCastRemove}
-            />
+            <CastModalModule profiles={cast} OnRemoveClick={handleCastRemove} />
           </div>
           <div className="form-control mt-4">
             <button
@@ -264,7 +262,7 @@ export const LabelWithBadge = ({
   );
 };
 
-const ModalModule = ({ profiles, OnRemoveClick }) => {
+const WritersModalModule = ({ profiles, OnRemoveClick }) => {
   if (profiles.length <= 0) return null;
 
   return (
@@ -284,6 +282,50 @@ const ModalModule = ({ profiles, OnRemoveClick }) => {
                   <span className="font-semibold">{name}</span>
                 </div>
                 <button onClick={() => OnRemoveClick(id)}>
+                  <IoClose size={18} />
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        <label className="modal-backdrop" htmlFor="my_modal">
+          Close
+        </label>
+      </div>
+    </>
+  );
+};
+
+const CastModalModule = ({ profiles, OnRemoveClick }) => {
+  if (profiles.length <= 0) return null;
+
+  return (
+    <>
+      <input type="checkbox" id="my_modal" className="modal-toggle" />
+      <div className="modal" role="dialog">
+        <div className="modal-box grid sm:grid-cols-1 xs:grid-cols-1 md:grid-cols-1 grid-cols-2 gap-4 p-4 rounded-md max-w-md custom-scrollbar">
+          {profiles.map(({ profile, roleAs, leadActor }) => {
+            return (
+              <div
+                key={profile.id}
+                className="flex items-center justify-between"
+              >
+                <div className="flex items-center">
+                  <img
+                    src={profile.avatar}
+                    alt={profile.name}
+                    className="rounded-full w-10 h-10 mr-3"
+                  />
+                  <div className="flex flex-col items-start">
+                    <span className="font-semibold text-sm">
+                      {profile.name}
+                    </span>
+                    <span className="text-[9.5px] opacity-60">
+                      {roleAs} {leadActor ? "( LeadActor )" : null}
+                    </span>
+                  </div>
+                </div>
+                <button onClick={() => OnRemoveClick(profile.id)}>
                   <IoClose size={18} />
                 </button>
               </div>
