@@ -33,14 +33,17 @@ const LiveSearch = ({
   };
 
   const handleSelection = (SelectedItem) => {
-    onSelect(SelectedItem);
+    if (SelectedItem) {
+      onSelect(SelectedItem);
+      closeSearchDropdown();
+    }
   };
 
   const handleKeyDown = (e) => {
     // console.log(key);
     const { key } = e;
     let nextCount;
-    const keys = ["ArrowUp", "ArrowDown", "Enter", "Escape"];
+    const keys = ["ArrowUp", "ArrowDown", "Enter"];
     if (!keys.includes(key)) return;
 
     // move selection up or down
