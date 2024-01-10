@@ -38,7 +38,7 @@ const CastForm = ({ onCastSubmit, cast }) => {
   return (
     <div className="form-control">
       <LabelWithBadge
-        htmlFor={"my_modal"}
+        htmlFor={"cast_list_modal"}
         label={"Cast & Crew"}
         badge={cast.length}
         viewBtn={cast.length > 0 ? true : false}

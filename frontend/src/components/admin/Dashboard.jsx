@@ -57,13 +57,7 @@ const Dashboard = ({ ToggleTheme }) => {
           </summary>
           <ul className="p-2 shadow menu right-0 dropdown-content z-[1] mt-2 gap-1 bg-base-100 rounded-sm w-36">
             <li>
-              <button
-                onClick={() => {
-                  document.getElementById("Movie_model").showModal();
-                }}
-              >
-                Add movie
-              </button>
+              <label htmlFor={"Movie_model"}>Add movie</label>
             </li>
             <li>
               <button>Add actor</button>

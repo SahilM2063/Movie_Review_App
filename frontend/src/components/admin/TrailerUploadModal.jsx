@@ -52,25 +52,28 @@ export default function TrailerUploadModal() {
   };
 
   return (
-    <dialog id="Movie_model" className="modal">
-      <div className="modal-box rounded-sm custom-scrollbar overflow-scroll overflow-x-hidden">
-        <div method="dialog">
-          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-            ✕
-          </button>
-          <TrailerSelector
-            visible={!videoSelected}
-            onTypeError={handleTypeError}
-            handleChange={handleChange}
-          />
-          <ProgressBar
-            progress={uploadProgress}
-            message={getUploadProgressValue()}
-            visible={!videoUploaded && videoSelected}
-          />
+    <>
+      <input type="checkbox" id="Movie_model" className="modal-toggle" />
+      <div className="modal" role="dialog" id="Movie_model">
+        <div className="modal-box rounded-sm custom-scrollbar overflow-scroll overflow-x-hidden">
+          <div method="dialog">
+            <TrailerSelector
+              visible={!videoSelected}
+              onTypeError={handleTypeError}
+              handleChange={handleChange}
+            />
+            <ProgressBar
+              progress={uploadProgress}
+              message={getUploadProgressValue()}
+              visible={!videoUploaded && videoSelected}
+            />
+          </div>
         </div>
+        <label className="modal-backdrop" htmlFor="Movie_model">
+          Close
+        </label>
       </div>
-    </dialog>
+    </>
   );
 }
 

@@ -301,7 +301,7 @@ const CastModalModule = ({ profiles, OnRemoveClick }) => {
 
   return (
     <>
-      <input type="checkbox" id="my_modal" className="modal-toggle" />
+      <input type="checkbox" id="cast_list_modal" className="modal-toggle" />
       <div className="modal" role="dialog">
         <div className="modal-box grid sm:grid-cols-1 xs:grid-cols-1 md:grid-cols-1 grid-cols-2 gap-4 p-4 rounded-md max-w-md custom-scrollbar">
           {profiles.map(({ profile, roleAs, leadActor }) => {
@@ -332,7 +332,7 @@ const CastModalModule = ({ profiles, OnRemoveClick }) => {
             );
           })}
         </div>
-        <label className="modal-backdrop" htmlFor="my_modal">
+        <label className="modal-backdrop" htmlFor="cast_list_modal">
           Close
         </label>
       </div>
