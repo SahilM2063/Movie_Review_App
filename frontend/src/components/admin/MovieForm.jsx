@@ -5,7 +5,6 @@ import TagInput from "./TagInput";
 import LiveSearch from "./LiveSearch";
 import { IoClose } from "react-icons/io5";
 import CastForm from "./CastForm";
-import { FaCheck } from "react-icons/fa6";
 
 export const profileData = [
   {
@@ -120,9 +119,10 @@ const MovieForm = () => {
       <h1 className="text-center text-xl font-semibold">Add movie</h1>
       <form
         onSubmit={handleSubmit}
-        className="card-body p-0 flex gap-4 flex-row"
+        className="card-body p-0 flex xs:flex-col sm:flex-col md:flex-col flex-row-reverse gap-4"
       >
-        <div className="w-[70%]">
+        <div className="section bg-slate-200 h-60 xs:w-full sm:w-full md:w-full w-[26%] mt-2"></div>
+        <div className="xs:w-full sm:w-full md:w-full w-[74%]">
           <div className="form-control">
             <label className="label">
               <span className="label-text text-[12px] leading-4">Title</span>
@@ -215,6 +215,18 @@ const MovieForm = () => {
             <CastForm onCastSubmit={updateCast} cast={cast} />
             <CastModalModule profiles={cast} OnRemoveClick={handleCastRemove} />
           </div>
+          <div className="form-control">
+          <label className="label">
+              <span className="label-text text-[12px] leading-4">Release date</span>
+            </label>
+            <input
+              type="date"
+              name="releaseDate"
+              // value={title}
+              onChange={handleChange}
+              className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
+            />
+          </div>
           <div className="form-control mt-4">
             <button
               className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs"
@@ -224,7 +236,6 @@ const MovieForm = () => {
             </button>
           </div>
         </div>
-        <div className="section bg-slate-200 h-60 w-[30%]"></div>
       </form>
     </div>
   );
@@ -301,7 +312,7 @@ const CastModalModule = ({ profiles, OnRemoveClick }) => {
 
   return (
     <>
-      <input type="checkbox" id="cast_list_modal" className="modal-toggle" />
+      <input type="checkbox" id="cast_list_modal" className="modal-toggle " />
       <div className="modal" role="dialog">
         <div className="modal-box grid sm:grid-cols-1 xs:grid-cols-1 md:grid-cols-1 grid-cols-2 gap-4 p-4 rounded-md max-w-md custom-scrollbar">
           {profiles.map(({ profile, roleAs, leadActor }) => {

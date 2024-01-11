@@ -83,7 +83,7 @@ const TrailerSelector = ({ visible, handleChange, onTypeError }) => {
   return (
     <>
       {/* <FileUploader
-        handleChange={handleChange}\
+        handleChange={handleChange}
         onTypeError={onTypeError}
         types={["mp4", "avi"]}
       >
