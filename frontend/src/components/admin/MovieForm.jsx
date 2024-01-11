@@ -114,7 +114,7 @@ const MovieForm = () => {
     setMovieInfo({ ...movieInfo, cast: [...newCast] });
   };
 
-  const { title, storyLine, director, writers, cast } = movieInfo;
+  const { title, storyLine, director, writers, cast, tags } = movieInfo;
   return (
     <div>
       <h1 className="text-center text-xl font-semibold">Add movie</h1>
@@ -151,7 +151,7 @@ const MovieForm = () => {
               className="input input-bordered outline-none rounded-sm px-2 text-xs pt-2 resize-none h-24"
             ></textarea>
           </div>
-          <TagInput name="tags" onChange={updateTags} />
+          <TagInput name="tags" onChange={updateTags} value={tags} />
           <div className="form-control">
             <label className="label">
               <span className="label-text text-[12px] leading-4">

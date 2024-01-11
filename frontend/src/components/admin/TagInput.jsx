@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { CgClose } from "react-icons/cg";
 
-const TagInput = ({ onChange }) => {
+const TagInput = ({ onChange, value }) => {
   const [tag, setTag] = useState("");
   const [tags, setTags] = useState([]);
 
@@ -43,6 +43,10 @@ const TagInput = ({ onChange }) => {
   };
 
   useEffect(() => {
+    if (value.length) return setTags(value);
+  }, [value]);
+
+  useEffect(() => {
     tagInput.current.scrollIntoView();
   }, [tag]);
 
@@ -52,7 +56,7 @@ const TagInput = ({ onChange }) => {
         <label className="label">
           <span className="label-text text-[12px] leading-4">Tags</span>
         </label>
-        <div className="flex flex-wrap items-center gap-1 input input-bordered outline-none rounded-sm p-2 text-sm overflow-scroll overflow-x-hidden custom-scrollbar">
+        <div className="flex flex-wrap justify-start p-[7px] items-center gap-1 input input-bordered outline-none rounded-sm text-sm overflow-scroll overflow-x-hidden custom-scrollbar">
           {tags.reverse().map((t) => (
             <Tag key={t} tagName={t} onClickFunc={() => removeTag(t)} />
           ))}
@@ -60,7 +64,7 @@ const TagInput = ({ onChange }) => {
             type="text"
             name="tagField"
             placeholder="Tag 1, Tag 2"
-            className="input px-1 focus:outline-none flex-grow outline-none rounded-sm h-9 text-xs"
+            className="input px-1 focus:outline-none flex-grow outline-none rounded-sm h-8 text-xs"
             value={tag}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
