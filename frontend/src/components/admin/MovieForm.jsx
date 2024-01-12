@@ -5,6 +5,7 @@ import TagInput from "./TagInput";
 import LiveSearch from "./LiveSearch";
 import { IoClose } from "react-icons/io5";
 import CastForm from "./CastForm";
+import PosterSelector from "./PosterSelector";
 
 export const profileData = [
   {
@@ -121,8 +122,9 @@ const MovieForm = () => {
         onSubmit={handleSubmit}
         className="card-body p-0 flex xs:flex-col sm:flex-col md:flex-col flex-row-reverse gap-4"
       >
-        <div className="section bg-slate-200 h-60 xs:w-full sm:w-full md:w-full w-[26%] mt-2"></div>
-        <div className="xs:w-full sm:w-full md:w-full w-[74%]">
+        {/* <div className="section bg-slate-200 h-60 xs:w-full sm:w-full md:w-full w-[26%] mt-2"></div> */}
+        <PosterSelector />
+        <div className="w-full">
           <div className="form-control">
             <label className="label">
               <span className="label-text text-[12px] leading-4">Title</span>
@@ -216,8 +218,10 @@ const MovieForm = () => {
             <CastModalModule profiles={cast} OnRemoveClick={handleCastRemove} />
           </div>
           <div className="form-control">
-          <label className="label">
-              <span className="label-text text-[12px] leading-4">Release date</span>
+            <label className="label">
+              <span className="label-text text-[12px] leading-4">
+                Release date
+              </span>
             </label>
             <input
               type="date"
