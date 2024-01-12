@@ -43,7 +43,7 @@ const CastForm = ({ onCastSubmit, cast }) => {
         badge={cast.length}
         viewBtn={cast.length > 0 ? true : false}
       />
-      <div className="flex justify-between gap-2 items-center w-full">
+      <div className="flex justify-between  gap-2 items-center w-full">
         <div className="tooltip text-sm" data-tip="LeadActor">
           <input
             type="checkbox"

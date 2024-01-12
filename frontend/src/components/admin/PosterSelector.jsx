@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 
-const PosterSelector = ({ name, selectedPoster=true  }) => {
+const PosterSelector = ({ name, selectedPoster, onChange, accept }) => {
   return (
     <div className="form">
       <label className="label">
@@ -10,17 +10,14 @@ const PosterSelector = ({ name, selectedPoster=true  }) => {
       </label>
       <div>
         {selectedPoster && (
-          <img
-          className="border rounded-sm"
-            src="https://img.freepik.com/free-photo/year-2024-collage-design_23-2151132448.jpg?size=626&ext=jpg"
-            alt=""
-          />
+          <img className="rounded-sm" src={selectedPoster} alt="" />
         )}
         <input
           type="file"
           name={name}
-          
-          className="file-input-bordered rounded-sm file-input-xs w-full max-w-xs text-xs"
+          accept={accept}
+          onChange={onChange}
+          className="border-base-100 rounded-sm file-input-xs w-full max-w-xs text-xs"
         />
       </div>
     </div>

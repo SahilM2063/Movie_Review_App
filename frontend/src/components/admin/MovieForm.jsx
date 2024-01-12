@@ -60,6 +60,7 @@ const defaultMovieInfo = {
 
 const MovieForm = () => {
   const [movieInfo, setMovieInfo] = useState({ ...defaultMovieInfo });
+  const [selectedPosterUI, setSelectedPosterUI] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,7 +68,13 @@ const MovieForm = () => {
   };
 
   const handleChange = ({ target }) => {
-    const { value, name } = target;
+    const { value, name, files } = target;
+
+    if (name === "poster") {
+      const poster = files[0];
+      updatePosterUI(poster);
+      return setMovieInfo({ ...movieInfo, poster });
+    }
     setMovieInfo({ ...movieInfo, [name]: value });
   };
 
@@ -114,6 +121,11 @@ const MovieForm = () => {
     setMovieInfo({ ...movieInfo, cast: [...newCast] });
   };
 
+  const updatePosterUI = (file) => {
+    const url = URL.createObjectURL(file);
+    setSelectedPosterUI(url);
+  };
+
   const { title, storyLine, director, writers, cast, tags } = movieInfo;
   return (
     <div>
@@ -123,7 +135,12 @@ const MovieForm = () => {
         className="card-body p-0 flex xs:flex-col sm:flex-col md:flex-col flex-row-reverse gap-4"
       >
         {/* <div className="section bg-slate-200 h-60 xs:w-full sm:w-full md:w-full w-[26%] mt-2"></div> */}
-        <PosterSelector />
+        <PosterSelector
+          name={"poster"}
+          onChange={handleChange}
+          selectedPoster={selectedPosterUI}
+          accept={"image/jpeg, image/jpg, image/png"}
+        />
         <div className="w-full">
           <div className="form-control">
             <label className="label">
