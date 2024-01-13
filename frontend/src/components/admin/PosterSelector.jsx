@@ -6,7 +6,7 @@ const PosterSelector = ({ name, selectedPoster, onChange, accept }) => {
   return (
     <div className="form">
       <label className="label">
-        <span className="label-text text-[12px] leading-4">Movie Poster</span>
+        <span className="label-text text-[12px] leading-4">Movie poster</span>
       </label>
       <div>
         {selectedPoster && (
