@@ -6,6 +6,7 @@ import LiveSearch from "./LiveSearch";
 import { IoClose } from "react-icons/io5";
 import CastForm from "./CastForm";
 import PosterSelector from "./PosterSelector";
+import GenreSelector from "./GenreSelector";
 
 export const profileData = [
   {
@@ -247,6 +248,9 @@ const MovieForm = () => {
               onChange={handleChange}
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
             />
+          </div>
+          <div className="form-control">
+            <GenreSelector />
           </div>
           <div className="form-control mt-4">
             <button
