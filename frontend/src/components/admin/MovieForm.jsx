@@ -100,11 +100,6 @@ const MovieForm = () => {
 
   const updateCast = (castInfo) => {
     const { cast } = movieInfo;
-    // for (let c of cast) {
-    //   if (c.profile.id === castInfo.profile.id) {
-    //     return;
-    //   }
-    // }
     setMovieInfo({ ...movieInfo, cast: [...cast, castInfo] });
   };
 
