@@ -6,7 +6,7 @@ import LiveSearch from "./LiveSearch";
 import { IoClose } from "react-icons/io5";
 import CastForm from "./CastForm";
 import PosterSelector from "./PosterSelector";
-import GenreSelector from "./GenreSelector";
+import { PiTreeStructureLight } from "react-icons/pi";
 
 export const profileData = [
   {
@@ -244,8 +244,20 @@ const MovieForm = () => {
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
             />
           </div>
-          <div className="form-control">
-            <GenreSelector />
+          <div className="form-control my-2">
+            <label className="label">
+              <span className="label-text text-[12px] leading-4">Genre</span>
+            </label>
+            <div>
+              <label
+                htmlFor="genre_modal"
+                className="btn px-3 min-h-8 h-9 rounded-sm text-xs capitalize"
+              >
+                <PiTreeStructureLight />
+                Select Genre
+              </label>
+            </div>
+            <GenreSelectorModal />
           </div>
           <div className="form-control mt-4">
             <button
@@ -364,6 +376,20 @@ const CastModalModule = ({ profiles, OnRemoveClick }) => {
           })}
         </div>
         <label className="modal-backdrop" htmlFor="cast_list_modal">
+          Close
+        </label>
+      </div>
+    </>
+  );
+};
+
+const GenreSelectorModal = () => {
+  return (
+    <>
+      <input type="checkbox" id="genre_modal" className="modal-toggle " />
+      <div className="modal" role="dialog">
+        <div className="modal-box grid sm:grid-cols-1 xs:grid-cols-1 md:grid-cols-1 grid-cols-2 gap-4 p-4 rounded-md max-w-md custom-scrollbar"></div>
+        <label className="modal-backdrop" htmlFor="genre_modal">
           Close
         </label>
       </div>
