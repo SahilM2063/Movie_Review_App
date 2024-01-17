@@ -7,6 +7,7 @@ import { IoClose } from "react-icons/io5";
 import CastForm from "./CastForm";
 import PosterSelector from "./PosterSelector";
 import { PiTreeStructureLight } from "react-icons/pi";
+import { genres } from "../../utils/genres.js";
 
 export const profileData = [
   {
@@ -250,7 +251,9 @@ const MovieForm = () => {
             </label>
             <div>
               <label
-                htmlFor="genre_modal"
+                onClick={() =>
+                  document.getElementById("genre_modal").showModal()
+                }
                 className="btn px-3 min-h-8 h-9 rounded-sm text-xs capitalize"
               >
                 <PiTreeStructureLight />
@@ -386,13 +389,23 @@ const CastModalModule = ({ profiles, OnRemoveClick }) => {
 const GenreSelectorModal = () => {
   return (
     <>
-      <input type="checkbox" id="genre_modal" className="modal-toggle " />
-      <div className="modal" role="dialog">
-        <div className="modal-box grid sm:grid-cols-1 xs:grid-cols-1 md:grid-cols-1 grid-cols-2 gap-4 p-4 rounded-md max-w-md custom-scrollbar"></div>
-        <label className="modal-backdrop" htmlFor="genre_modal">
-          Close
-        </label>
-      </div>
+      <dialog id="genre_modal" className="modal">
+        <div className="modal-box max-h-[40%] xs:max-h-[68%] md:max-h-[50%] sm:max-h-[68%]  rounded-md max-w-md overflow-scroll overflow-x-hidden custom-scrollbar">
+          <h1 className="text-xl text-center font-semibold mb-4">Select genres</h1>
+          <div className="flex items-center gap-2 flex-wrap">
+            {genres.map((gen, i) => {
+              return (
+                <kbd className="kbd text-[11px] cursor-pointer rounded-sm" key={i}>
+                  {gen}
+                </kbd>
+              );
+            })}
+          </div>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </>
   );
 };
