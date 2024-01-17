@@ -164,7 +164,7 @@ const MovieForm = () => {
               onChange={handleChange}
               placeholder="Movie description"
               rows={10}
-              className="input input-bordered outline-none rounded-sm px-2 text-xs pt-2 resize-none h-24"
+              className="input input-bordered outline-none rounded-sm px-2 text-xs pt-2 resize-none h-24 custom-scrollbar"
             ></textarea>
           </div>
           <TagInput name="tags" onChange={updateTags} value={tags} />
@@ -197,7 +197,7 @@ const MovieForm = () => {
           </div>
           <div className="form-control">
             <LabelWithBadge
-              htmlFor={"my_modal"}
+              htmlFor={"writer_modal"}
               label={"Writers"}
               badge={writers.length}
               viewBtn={writers.length > 0 ? true : false}
@@ -300,7 +300,10 @@ export const LabelWithBadge = ({
         </label>
       </div>
       {viewBtn && (
-        <label className="text-[10px] cursor-pointer" htmlFor={htmlFor}>
+        <label
+          className="text-[10px] cursor-pointer"
+          onClick={() => document.getElementById(htmlFor).showModal()}
+        >
           View all
         </label>
       )}
@@ -313,9 +316,8 @@ const WritersModalModule = ({ profiles, OnRemoveClick }) => {
 
   return (
     <>
-      <input type="checkbox" id="my_modal" className="modal-toggle" />
-      <div className="modal" role="dialog">
-        <div className="modal-box grid sm:grid-cols-1 xs:grid-cols-1 md:grid-cols-1 grid-cols-2 gap-4 p-4 rounded-md max-w-md custom-scrollbar">
+      <dialog id="writer_modal" className="modal">
+        <div className="modal-box max-h-[40%] xs:max-h-[68%] md:max-h-[50%] sm:max-h-[68%] grid grid-cols-2 xs:grid-cols-1 sm:grid-cols-1 gap-4 rounded-md max-w-md overflow-scroll overflow-x-hidden custom-scrollbar">
           {profiles.map(({ id, name, avatar }) => {
             return (
               <div key={id} className="flex items-center justify-between">
@@ -334,10 +336,10 @@ const WritersModalModule = ({ profiles, OnRemoveClick }) => {
             );
           })}
         </div>
-        <label className="modal-backdrop" htmlFor="my_modal">
-          Close
-        </label>
-      </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </>
   );
 };
@@ -347,9 +349,8 @@ const CastModalModule = ({ profiles, OnRemoveClick }) => {
 
   return (
     <>
-      <input type="checkbox" id="cast_list_modal" className="modal-toggle " />
-      <div className="modal" role="dialog">
-        <div className="modal-box grid sm:grid-cols-1 xs:grid-cols-1 md:grid-cols-1 grid-cols-2 gap-4 p-4 rounded-md max-w-md custom-scrollbar">
+      <dialog id="cast_modal" className="modal">
+        <div className="modal-box max-h-[40%] xs:max-h-[68%] md:max-h-[50%] sm:max-h-[68%] grid grid-cols-2 xs:grid-cols-1 sm:grid-cols-1 gap-4 rounded-md max-w-md overflow-scroll overflow-x-hidden custom-scrollbar">
           {profiles.map(({ profile, roleAs, leadActor }) => {
             return (
               <div
@@ -378,10 +379,10 @@ const CastModalModule = ({ profiles, OnRemoveClick }) => {
             );
           })}
         </div>
-        <label className="modal-backdrop" htmlFor="cast_list_modal">
-          Close
-        </label>
-      </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </>
   );
 };
@@ -391,11 +392,16 @@ const GenreSelectorModal = () => {
     <>
       <dialog id="genre_modal" className="modal">
         <div className="modal-box max-h-[40%] xs:max-h-[68%] md:max-h-[50%] sm:max-h-[68%]  rounded-md max-w-md overflow-scroll overflow-x-hidden custom-scrollbar">
-          <h1 className="text-xl text-center font-semibold mb-4">Select genres</h1>
+          <h1 className="text-xl text-center font-semibold mb-4">
+            Select genres
+          </h1>
           <div className="flex items-center gap-2 flex-wrap">
             {genres.map((gen, i) => {
               return (
-                <kbd className="kbd text-[11px] cursor-pointer rounded-sm" key={i}>
+                <kbd
+                  className="kbd text-[11px] cursor-pointer rounded-sm"
+                  key={i}
+                >
                   {gen}
                 </kbd>
               );
