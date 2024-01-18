@@ -10,7 +10,11 @@ import { PiTreeStructureLight } from "react-icons/pi";
 import { genres } from "../../utils/genres.js";
 import GenreSelectorModal from "./GenreSelectorModal.jsx";
 import SelectField from "./SelectField.jsx";
-import { typesOptions, languagesOptions, statusOptions } from "../../utils/options.js";
+import {
+  typesOptions,
+  languagesOptions,
+  statusOptions,
+} from "../../utils/options.js";
 
 export const profileData = [
   {
@@ -130,7 +134,18 @@ const MovieForm = () => {
     setSelectedPosterUI(url);
   };
 
-  const { title, storyLine, director, writers, cast, tags } = movieInfo;
+  const {
+    title,
+    storyLine,
+    director,
+    writers,
+    cast,
+    tags,
+    genres,
+    type,
+    language,
+    status,
+  } = movieInfo;
   return (
     <div>
       <h1 className="text-center text-xl font-semibold">Add movie</h1>
@@ -276,7 +291,8 @@ const MovieForm = () => {
               </label>
               <SelectField
                 id={"type"}
-                name={"type"}
+                name="type"
+                value={type}
                 onChange={handleChange}
                 def={"Select type"}
                 options={typesOptions}
@@ -292,7 +308,8 @@ const MovieForm = () => {
               </label>
               <SelectField
                 id={"language"}
-                name={"language"}
+                name="language"
+                value={language}
                 onChange={handleChange}
                 def={"Select language"}
                 options={languagesOptions}
@@ -304,7 +321,8 @@ const MovieForm = () => {
               </label>
               <SelectField
                 id={"status"}
-                name={"status"}
+                name="status"
+                value={status}
                 onChange={handleChange}
                 def={"Status"}
                 options={statusOptions}
