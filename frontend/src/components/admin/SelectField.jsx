@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 
-const SelectField = ({ id, name, value, onChange, def }) => {
+const SelectField = ({ id, name, value, onChange, def, options }) => {
   return (
     <select
       className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
@@ -11,9 +11,14 @@ const SelectField = ({ id, name, value, onChange, def }) => {
       value={value}
       onChange={onChange}
     >
-      <option selected>{def}</option>
-      <option>Han Solo</option>
-      <option>Greedo</option>
+      <options selected>{def}</options>
+      {options.map(({ title, value }, i) => {
+        return (
+          <option key={i} value={value}>
+            {title}
+          </option>
+        );
+      })}
     </select>
   );
 };

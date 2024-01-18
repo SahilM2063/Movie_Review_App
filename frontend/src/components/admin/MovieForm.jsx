@@ -10,6 +10,7 @@ import { PiTreeStructureLight } from "react-icons/pi";
 import { genres } from "../../utils/genres.js";
 import GenreSelectorModal from "./GenreSelectorModal.jsx";
 import SelectField from "./SelectField.jsx";
+import { typesOptions, languagesOptions, statusOptions } from "../../utils/options.js";
 
 export const profileData = [
   {
@@ -278,6 +279,7 @@ const MovieForm = () => {
                 name={"type"}
                 onChange={handleChange}
                 def={"Select type"}
+                options={typesOptions}
               />
             </div>
           </div>
@@ -293,6 +295,7 @@ const MovieForm = () => {
                 name={"language"}
                 onChange={handleChange}
                 def={"Select language"}
+                options={languagesOptions}
               />
             </div>
             <div className="form-control w-full">
@@ -304,6 +307,7 @@ const MovieForm = () => {
                 name={"status"}
                 onChange={handleChange}
                 def={"Status"}
+                options={statusOptions}
               />
             </div>
           </div>
