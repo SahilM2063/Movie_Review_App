@@ -8,6 +8,7 @@ import CastForm from "./CastForm";
 import PosterSelector from "./PosterSelector";
 import { PiTreeStructureLight } from "react-icons/pi";
 import { genres } from "../../utils/genres.js";
+import GenreSelectorModal from "./GenreSelectorModal.jsx";
 
 export const profileData = [
   {
@@ -387,31 +388,4 @@ const CastModalModule = ({ profiles, OnRemoveClick }) => {
   );
 };
 
-const GenreSelectorModal = () => {
-  return (
-    <>
-      <dialog id="genre_modal" className="modal">
-        <div className="modal-box max-h-[40%] xs:max-h-[68%] md:max-h-[50%] sm:max-h-[68%]  rounded-md max-w-md overflow-scroll overflow-x-hidden custom-scrollbar">
-          <h1 className="text-xl text-center font-semibold mb-4">
-            Select genres
-          </h1>
-          <div className="flex items-center gap-2 flex-wrap">
-            {genres.map((gen, i) => {
-              return (
-                <kbd
-                  className="kbd text-[11px] cursor-pointer rounded-sm"
-                  key={i}
-                >
-                  {gen}
-                </kbd>
-              );
-            })}
-          </div>
-        </div>
-        <form method="dialog" className="modal-backdrop">
-          <button>close</button>
-        </form>
-      </dialog>
-    </>
-  );
-};
+
