@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { genres } from "../../utils/genres";
 
-const GenreSelectorModal = () => {
+const GenreSelectorModal = ({ onSubmit }) => {
   const [selectedGenre, setSelectedGenre] = useState([]);
   const [mainGenre, setMainGenre] = useState([...genres]);
 
@@ -29,9 +30,11 @@ const GenreSelectorModal = () => {
     }
   };
 
-  useState(() => {}, [mainGenre, selectedGenre]);
-
-  console.log(selectedGenre);
+  const handleSubmit = () => {
+    onSubmit(selectedGenre);
+    document.getElementById("genre_modal").close();
+    setSelectedGenre([]);
+  };
 
   return (
     <>
@@ -53,7 +56,7 @@ const GenreSelectorModal = () => {
               );
             })}
           </div>
-          <hr className="my-2"/>
+          {selectedGenre.length > 0 ? <hr className="my-2" /> : null}
           <div className="flex items-center gap-2 flex-wrap">
             {mainGenre.map((gen, i) => {
               return (
@@ -67,6 +70,13 @@ const GenreSelectorModal = () => {
               );
             })}
           </div>
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className="btn px-3 min-h-8 h-9 rounded-sm text-xs w-full my-2"
+          >
+            Select
+          </button>
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>

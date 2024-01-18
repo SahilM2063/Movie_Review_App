@@ -105,6 +105,10 @@ const MovieForm = () => {
     setMovieInfo({ ...movieInfo, cast: [...cast, castInfo] });
   };
 
+  const updateGenres = (genres) => {
+    setMovieInfo({ ...movieInfo, genres });
+  };
+
   const handleWriterRemove = (profileId) => {
     const { writers } = movieInfo;
     const newWriters = writers.filter(({ id }) => id !== profileId);
@@ -261,7 +265,7 @@ const MovieForm = () => {
                 Select Genre
               </label>
             </div>
-            <GenreSelectorModal />
+            <GenreSelectorModal onSubmit={updateGenres} />
           </div>
           <div className="form-control mt-4">
             <button
@@ -387,5 +391,3 @@ const CastModalModule = ({ profiles, OnRemoveClick }) => {
     </>
   );
 };
-
-
