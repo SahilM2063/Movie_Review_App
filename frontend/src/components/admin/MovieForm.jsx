@@ -9,6 +9,7 @@ import PosterSelector from "./PosterSelector";
 import { PiTreeStructureLight } from "react-icons/pi";
 import { genres } from "../../utils/genres.js";
 import GenreSelectorModal from "./GenreSelectorModal.jsx";
+import SelectField from "./SelectField.jsx";
 
 export const profileData = [
   {
@@ -250,22 +251,61 @@ const MovieForm = () => {
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
             />
           </div>
-          <div className="form-control my-2">
-            <label className="label">
-              <span className="label-text text-[12px] leading-4">Genre</span>
-            </label>
-            <div>
-              <label
-                onClick={() =>
-                  document.getElementById("genre_modal").showModal()
-                }
-                className="btn px-3 min-h-8 h-9 rounded-sm text-xs capitalize"
-              >
-                <PiTreeStructureLight />
-                Select Genre
+          <div className="w-full flex justify-between items-center gap-2">
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text text-[12px] leading-4">Genre</span>
               </label>
+              <div>
+                <label
+                  onClick={() =>
+                    document.getElementById("genre_modal").showModal()
+                  }
+                  className="btn px-3 min-h-8 h-9 rounded-sm text-xs capitalize"
+                >
+                  <PiTreeStructureLight />
+                  Select Genre
+                </label>
+              </div>
+              <GenreSelectorModal onSubmit={updateGenres} />
             </div>
-            <GenreSelectorModal onSubmit={updateGenres} />
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text text-[12px] leading-4">Type</span>
+              </label>
+              <SelectField
+                id={"type"}
+                name={"type"}
+                onChange={handleChange}
+                def={"Select type"}
+              />
+            </div>
+          </div>
+          <div className="w-full flex justify-between items-center gap-2">
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text text-[12px] leading-4">
+                  Language
+                </span>
+              </label>
+              <SelectField
+                id={"language"}
+                name={"language"}
+                onChange={handleChange}
+                def={"Select language"}
+              />
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text text-[12px] leading-4">Status</span>
+              </label>
+              <SelectField
+                id={"status"}
+                name={"status"}
+                onChange={handleChange}
+                def={"Status"}
+              />
+            </div>
           </div>
           <div className="form-control mt-4">
             <button
