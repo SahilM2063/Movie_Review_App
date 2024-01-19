@@ -63,7 +63,7 @@ const LiveSearch = ({
   };
 
   return (
-    <div className="form-control relative">
+    <div className="form-control relative flex-1">
       <input
         type="text"
         name={name}

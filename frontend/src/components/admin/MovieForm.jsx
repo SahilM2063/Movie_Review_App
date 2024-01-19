@@ -151,7 +151,7 @@ const MovieForm = () => {
       <h1 className="text-center text-xl font-semibold">Add movie</h1>
       <form
         onSubmit={handleSubmit}
-        className="card-body p-0 flex xs:flex-col sm:flex-col md:flex-col flex-row-reverse gap-4"
+        className="card-body p-0 flex flex-col flex-row-reverse gap-4"
       >
         {/* <div className="section bg-slate-200 h-60 xs:w-full sm:w-full md:w-full w-[26%] mt-2"></div> */}
         <PosterSelector

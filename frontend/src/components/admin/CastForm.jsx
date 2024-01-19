@@ -43,7 +43,7 @@ const CastForm = ({ onCastSubmit, cast }) => {
         badge={cast.length}
         viewBtn={cast.length > 0 ? true : false}
       />
-      <div className="flex justify-between  gap-2 items-center w-full">
+      <div className="flex justify-between  gap-2 items-center w-full xs:flex-wrap sm:flex-wrap md:flex-wrap">
         <div className="tooltip text-sm" data-tip="LeadActor">
           <input
             type="checkbox"
@@ -69,7 +69,7 @@ const CastForm = ({ onCastSubmit, cast }) => {
           placeholder="role as"
           value={roleAs}
           onChange={handleOnChange}
-          className="input w-[48%] input-bordered outline-none rounded-sm px-2 h-9 text-xs"
+          className="input flex-1 input-bordered outline-none rounded-sm px-2 h-9 text-xs"
         />
         <button
           onClick={submitCast}
