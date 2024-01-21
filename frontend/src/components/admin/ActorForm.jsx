@@ -90,9 +90,7 @@ const ActorForm = () => {
           <div className="flex justify-between items-end gap-4 ">
             <div className="form-control w-full">
               <label className="label">
-                <span className="label-text text-[12px] leading-4">
-                  Language
-                </span>
+                <span className="label-text text-[12px] leading-4">Gender</span>
               </label>
               <SelectField
                 id={"gender"}
