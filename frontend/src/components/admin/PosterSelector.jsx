@@ -2,11 +2,11 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 
-const PosterSelector = ({ name, selectedPoster, onChange, accept }) => {
+const PosterSelector = ({ name, selectedPoster, onChange, accept, label }) => {
   return (
     <div className="form">
       <label className="label">
-        <span className="label-text text-[12px] leading-4">Movie poster</span>
+        <span className="label-text text-[12px] leading-4">{label}</span>
       </label>
       <div>
         {selectedPoster && (

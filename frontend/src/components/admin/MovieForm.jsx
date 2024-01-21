@@ -155,6 +155,7 @@ const MovieForm = () => {
       >
         {/* <div className="section bg-slate-200 h-60 xs:w-full sm:w-full md:w-full w-[26%] mt-2"></div> */}
         <PosterSelector
+          label={"Movie poster"}
           name={"poster"}
           onChange={handleChange}
           selectedPoster={selectedPosterUI}
