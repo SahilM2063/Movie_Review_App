@@ -2,24 +2,38 @@
 import React, { useState } from "react";
 import PosterSelector from "./PosterSelector";
 
-const ActorForm = () => {
-  const [profilePic, setProfilePic] = useState("");
+const defaultActorInfo = {
+  name: "",
+  about: "",
+  avatar: null,
+};
 
-  const handleSubmit = () => {};
+const ActorForm = () => {
+  const [actorInfo, setActorInfo] = useState({ ...defaultActorInfo });
+  const [selectedAvatar, setSelectedAvatar] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(actorInfo);
+  };
 
   const handleChange = ({ target }) => {
     const { name, value, files } = target;
-    if (name === "profilepic") {
-      const profile = files[0];
-      updateProfilePicUI(profile);
+    if (name === "avatar") {
+      const avatar = files[0];
+      updateAvatarUI(avatar);
+      return setActorInfo({ ...actorInfo, avatar });
     }
+
+    setActorInfo({ ...actorInfo, [name]: value });
   };
 
-  const updateProfilePicUI = (file) => {
+  const updateAvatarUI = (file) => {
     const url = URL.createObjectURL(file);
-    setProfilePic(url);
+    setSelectedAvatar(url);
   };
 
+  const { name, about } = actorInfo;
   return (
     <div>
       <h1 className="text-center text-xl font-semibold">Add Actor</h1>
@@ -31,9 +45,9 @@ const ActorForm = () => {
           <div className="form-control max-w-[50%]">
             <PosterSelector
               label={"Actor Profile"}
-              name={"profilepic"}
+              name={"avatar"}
               onChange={handleChange}
-              selectedPoster={profilePic}
+              selectedPoster={selectedAvatar}
               accept={"image/jpeg, image/jpg, image/png"}
             />
           </div>
@@ -46,7 +60,7 @@ const ActorForm = () => {
             <input
               type="text"
               name="name"
-              value={""}
+              value={name}
               onChange={handleChange}
               placeholder="Actor name"
               className="input input-bordered outline-none rounded-sm px-2 h-9 text-xs"
@@ -58,7 +72,7 @@ const ActorForm = () => {
             </label>
             <textarea
               name="about"
-              value={""}
+              value={about}
               onChange={handleChange}
               placeholder="About actor"
               rows={10}
