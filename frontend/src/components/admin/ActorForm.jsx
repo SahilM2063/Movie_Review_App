@@ -1,12 +1,20 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import PosterSelector from "./PosterSelector";
+import SelectField from "./SelectField";
 
 const defaultActorInfo = {
   name: "",
   about: "",
+  gender: "",
   avatar: null,
 };
+
+const genderOptions = [
+  { title: "Male", value: "male" },
+  { title: "Female", value: "female" },
+  { title: "Other", value: "other" },
+];
 
 const ActorForm = () => {
   const [actorInfo, setActorInfo] = useState({ ...defaultActorInfo });
@@ -33,7 +41,7 @@ const ActorForm = () => {
     setSelectedAvatar(url);
   };
 
-  const { name, about } = actorInfo;
+  const { name, about, gender } = actorInfo;
   return (
     <div>
       <h1 className="text-center text-xl font-semibold">Add Actor</h1>
@@ -79,13 +87,30 @@ const ActorForm = () => {
               className="input input-bordered outline-none rounded-sm px-2 text-xs pt-2 resize-none h-24 custom-scrollbar"
             ></textarea>
           </div>
-          <div className="form-control mt-4">
-            <button
-              className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs"
-              type="submit"
-            >
-              Add
-            </button>
+          <div className="flex justify-between items-end gap-4 ">
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text text-[12px] leading-4">
+                  Language
+                </span>
+              </label>
+              <SelectField
+                id={"gender"}
+                name="gender"
+                value={gender}
+                onChange={handleChange}
+                def={"Select gender"}
+                options={genderOptions}
+              />
+            </div>
+            <div className="form-control mt-4 w-full">
+              <button
+                className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs"
+                type="submit"
+              >
+                Add
+              </button>
+            </div>
           </div>
         </div>
       </form>
