@@ -60,7 +60,7 @@ const Dashboard = ({ ToggleTheme }) => {
               <label htmlFor={"Movie_model"}>Add movie</label>
             </li>
             <li>
-              <button>Add actor</button>
+              <label htmlFor={"Actor_model"}>Add actor</label>
             </li>
           </ul>
         </details>

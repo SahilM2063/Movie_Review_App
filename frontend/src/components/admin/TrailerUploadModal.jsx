@@ -7,6 +7,7 @@ import { uploadTrailer } from "../../api/movie";
 import { useNotification } from "../../hooks";
 import ProgressBar from "./ProgressBar";
 import MovieForm from "./MovieForm";
+import ActorForm from "./ActorForm";
 
 export default function TrailerUploadModal() {
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -70,6 +71,16 @@ export default function TrailerUploadModal() {
           </div>
         </div>
         <label className="modal-backdrop" htmlFor="Movie_model">
+          Close
+        </label>
+      </div>
+
+      <input type="checkbox" id="Actor_model" className="modal-toggle" />
+      <div className="modal" role="dialog" id="Movie_model">
+        <div className="modal-box rounded-sm custom-scrollbar overflow-scroll overflow-x-hidden">
+          <ActorForm />
+        </div>
+        <label className="modal-backdrop" htmlFor="Actor_model">
           Close
         </label>
       </div>
