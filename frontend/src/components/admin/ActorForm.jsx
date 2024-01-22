@@ -37,7 +37,12 @@ const ActorForm = ({ onSubmit }) => {
     e.preventDefault();
     const { error } = validateActor(actorInfo);
     if (error) return updateNotification("error", error);
-    onSubmit(actorInfo);
+
+    const formData = new FormData();
+    for (let key in actorInfo) {
+      if (key) formData.append(key, actorInfo[key]);
+    }
+    onSubmit(formData);
   };
 
   const handleChange = ({ target }) => {

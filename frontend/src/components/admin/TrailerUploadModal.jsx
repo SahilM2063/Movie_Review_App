@@ -53,8 +53,9 @@ export default function TrailerUploadModal() {
     return `Upload Progress ${uploadProgress}%`;
   };
 
-  const handleActorSubmit = (data) => {
-    createActor(data);
+  const handleActorSubmit = async (data) => {
+    const res = await createActor(data);
+    console.log(res);
   };
 
   return (
