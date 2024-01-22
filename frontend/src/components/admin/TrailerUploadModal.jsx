@@ -8,6 +8,7 @@ import { useNotification } from "../../hooks";
 import ProgressBar from "./ProgressBar";
 import MovieForm from "./MovieForm";
 import ActorForm from "./ActorForm";
+import { createActor } from "../../api/actor";
 
 export default function TrailerUploadModal() {
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -53,7 +54,7 @@ export default function TrailerUploadModal() {
   };
 
   const handleActorSubmit = (data) => {
-    console.log(data);
+    createActor(data);
   };
 
   return (
