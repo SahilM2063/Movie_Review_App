@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import PosterSelector from "./PosterSelector";
 import SelectField from "./SelectField";
+import { useNotification } from "../../hooks";
 
 const defaultActorInfo = {
   name: "",
@@ -16,13 +18,26 @@ const genderOptions = [
   { title: "Other", value: "other" },
 ];
 
-const ActorForm = () => {
+const validateActor = ({ name, avatar, gender, about }) => {
+  if (!name.trim()) return { error: "Name is missing!" };
+  if (!about.trim()) return { error: "About is missing!" };
+  if (!gender.trim()) return { error: "Gender is missing!" };
+  if (!avatar && !avatar?.type.startsWith("image"))
+    return { error: "Image is not valid!" };
+
+  return { error: null };
+};
+
+const ActorForm = ({ onSubmit }) => {
   const [actorInfo, setActorInfo] = useState({ ...defaultActorInfo });
   const [selectedAvatar, setSelectedAvatar] = useState("");
+  const updateNotification = useNotification();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(actorInfo);
+    const { error } = validateActor(actorInfo);
+    if (error) return updateNotification("error", error);
+    onSubmit(actorInfo);
   };
 
   const handleChange = ({ target }) => {

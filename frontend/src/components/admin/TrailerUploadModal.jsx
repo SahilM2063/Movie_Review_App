@@ -52,6 +52,10 @@ export default function TrailerUploadModal() {
     return `Upload Progress ${uploadProgress}%`;
   };
 
+  const handleActorSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <>
       <input type="checkbox" id="Movie_model" className="modal-toggle" />
@@ -78,7 +82,7 @@ export default function TrailerUploadModal() {
       <input type="checkbox" id="Actor_model" className="modal-toggle" />
       <div className="modal" role="dialog" id="Movie_model">
         <div className="modal-box rounded-sm custom-scrollbar overflow-scroll overflow-x-hidden">
-          <ActorForm />
+          <ActorForm onSubmit={handleActorSubmit} />
         </div>
         <label className="modal-backdrop" htmlFor="Actor_model">
           Close

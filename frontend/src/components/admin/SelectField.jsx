@@ -11,7 +11,7 @@ const SelectField = ({ id, name, value, onChange, def, options }) => {
       value={value}
       onChange={onChange}
     >
-      <options selected>{def}</options>
+      <option selected>{def}</option>
       {options.map(({ title, value }, i) => {
         return (
           <option key={i} value={value}>
