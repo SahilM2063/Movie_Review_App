@@ -29,7 +29,7 @@ exports.createActor = async (req, res) => {
     }
 
     await newActor.save();
-    res.status(201).json({ id: newActor._id, name, about, gender, avatar: newActor.avatar?.url });
+    res.status(201).json({ actor: { id: newActor._id, name, about, gender, avatar: newActor.avatar?.url } });
 };
 
 

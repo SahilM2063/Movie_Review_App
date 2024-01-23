@@ -54,8 +54,11 @@ export default function TrailerUploadModal() {
   };
 
   const handleActorSubmit = async (data) => {
-    const res = await createActor(data);
-    console.log(res);
+    const { error, actor } = await createActor(data);
+    if (error) return updateNotification("error", error);
+
+    console.log(actor);
+    updateNotification("succes", "Actor created successfully");
   };
 
   return (
