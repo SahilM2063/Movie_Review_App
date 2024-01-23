@@ -15,6 +15,7 @@ export default function TrailerUploadModal() {
   const [videoUploaded, setVideoUploaded] = useState(false);
   const [videoSelected, setVideoSelected] = useState(false);
   const [trailerInfo, setTrailerInfo] = useState({});
+  const [busyActor, setBusyActor] = useState(false);
 
   const updateNotification = useNotification();
 
@@ -54,7 +55,9 @@ export default function TrailerUploadModal() {
   };
 
   const handleActorSubmit = async (data) => {
+    setBusyActor(true);
     const { error, actor } = await createActor(data);
+    setBusyActor(false);
     if (error) return updateNotification("error", error);
 
     console.log(actor);
@@ -85,9 +88,12 @@ export default function TrailerUploadModal() {
       </div>
 
       <input type="checkbox" id="Actor_model" className="modal-toggle" />
-      <div className="modal" role="dialog" id="Movie_model">
+      <div className="modal" role="dialog" id="Actor_model">
         <div className="modal-box rounded-sm custom-scrollbar overflow-scroll overflow-x-hidden">
-          <ActorForm onSubmit={handleActorSubmit} />
+          <ActorForm
+            onSubmit={!busyActor ? handleActorSubmit : null}
+            busy={busyActor}
+          />
         </div>
         <label className="modal-backdrop" htmlFor="Actor_model">
           Close

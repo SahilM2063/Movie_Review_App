@@ -28,7 +28,7 @@ const validateActor = ({ name, avatar, gender, about }) => {
   return { error: null };
 };
 
-const ActorForm = ({ onSubmit }) => {
+const ActorForm = ({ onSubmit, busy }) => {
   const [actorInfo, setActorInfo] = useState({ ...defaultActorInfo });
   const [selectedAvatar, setSelectedAvatar] = useState("");
   const updateNotification = useNotification();
@@ -126,7 +126,11 @@ const ActorForm = ({ onSubmit }) => {
                 className="btn btn-primary px-3 min-h-8 h-9 rounded-sm text-xs"
                 type="submit"
               >
-                Add
+                {busy ? (
+                  <span className="loading loading-ring loading-md"></span>
+                ) : (
+                  "Add"
+                )}
               </button>
             </div>
           </div>
