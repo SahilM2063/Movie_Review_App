@@ -5,6 +5,7 @@ import LiveSearch from "./LiveSearch";
 import { LabelWithBadge, profileData, renderItems } from "./MovieForm";
 import { useNotification } from "../../hooks";
 
+// default for initial state
 const defaultCastInfo = {
   profile: {},
   roleAs: "",
